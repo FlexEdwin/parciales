@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-M">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Circuito Puente</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: grid;
+            place-items: center;
+            min-height: 90vh;
+            background: linear-gradient(45deg, #007bff, #28a745, #000000, #007bff);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .watermark {
+            position: absolute;
+            font-size: 60px; /* Reducido para móviles */
+            color: rgba(255, 255, 255, 0.08);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 15s ease-in-out infinite;
+            white-space: nowrap;
+        }
+        /* Posiciones responsivas para watermarks */
+        .watermark:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
+        .watermark:nth-child(2) { top: 10%; right: 10%; animation-delay: 1s; }
+        .watermark:nth-child(3) { bottom: 10%; left: 10%; animation-delay: 2s; }
+        .watermark:nth-child(4) { bottom: 5%; right: 5%; animation-delay: 3s; }
+        .watermark:nth-child(5) { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); animation-delay: 4s; }
+        .watermark:nth-child(6) { top: 20%; left: 30%; animation-delay: 5s; }
+        .watermark:nth-child(7) { top: 30%; right: 20%; animation-delay: 6s; }
+        .watermark:nth-child(8) { bottom: 20%; left: 40%; animation-delay: 7s; }
+        .watermark:nth-child(9) { bottom: 30%; right: 30%; animation-delay: 8s; }
+        .watermark:nth-child(10) { top: 70%; left: 15%; animation-delay: 9s; }
+        .watermark:nth-child(11) { top: 15%; right: 40%; animation-delay: 10s; }
+        .watermark:nth-child(12) { bottom: 40%; left: 20%; animation-delay: 11s; }
+        .watermark:nth-child(13) { bottom: 50%; right: 15%; animation-delay: 12s; }
+        .watermark:nth-child(14) { top: 40%; left: 60%; animation-delay: 13s; }
+        .watermark:nth-child(15) { top: 60%; right: 50%; animation-delay: 14s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.08; }
+            25% { transform: translateY(-15px) rotate(3deg); opacity: 0.12; }
+            50% { transform: translateY(0px) rotate(0deg); opacity: 0.08; }
+            75% { transform: translateY(15px) rotate(-3deg); opacity: 0.12; }
+        }
+        /* Media query para móviles: ajustar tamaño de watermarks */
+        @media (max-width: 768px) {
+            .watermark {
+                font-size: 40px; /* Más pequeño en móviles */
+            }
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .result-item strong {
+            font-size: 1.1em;
+        }
+        .mayor {
+            background-color: #e6f7ff;
+            color: #0056b3;
+        }
+        .menor {
+            background-color: #fffbe6;
+            color: #b38600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Watermarks dinámicos distribuidos por toda la pantalla -->
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+    <div class="watermark">@flexedwin</div>
+
+    <div class="container">
+        <h1>Calculadora Realizada Por Eduin Rivera</h1>
+        
+        <div class="input-group">
+            <label for="vm">Vm (Voltaje pico de entrada, en V)</label>
+            <input type="number" id="vm" placeholder="Ej: 90">
+        </div>
+
+        <div class="input-group">
+            <label for="r1">R1 (en kΩ)</label>
+            <input type="number" id="r1" placeholder="Ej: 47">
+        </div>
+
+        <div class="input-group">
+            <label for="r2">R2 (en kΩ)</label>
+            <input type="number" id="r2" placeholder="Ej: 2">
+        </div>
+
+        <div class="input-group">
+            <label for="ro">Ro (en kΩ)</label>
+            <input type="number" id="ro" placeholder="Ej: 1">
+        </div>
+        
+        <button onclick="calcular()">Calcular</button>
+        
+        <div class="results">
+            <div class="result-item mayor">
+                <span>Mayor Voltaje Pico:</span>
+                <strong id="mayor-pico">- V</strong>
+            </div>
+            <div class="result-item menor">
+                <span>Menor Voltaje Pico:</span>
+                <strong id="menor-pico">- V</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calcular() {
+            // Obtener valores de entrada
+            const Vm = parseFloat(document.getElementById('vm').value);
+            const R1 = parseFloat(document.getElementById('r1').value);
+            const R2 = parseFloat(document.getElementById('r2').value);
+            const Ro = parseFloat(document.getElementById('ro').value);
+
+            // Validar entradas
+            if (isNaN(Vm) || isNaN(R1) || isNaN(R2) || isNaN(Ro) || R1 <= 0 || R2 <= 0 || Ro <= 0 || Vm <= 0) {
+                alert("Por favor, ingresa valores numéricos positivos en todos los campos.");
+                return;
+            }
+
+            // Calcular equivalentes (Fórmulas A)
+            const Req1 = (R1 * Ro) / (R1 + Ro); // R1 || Ro
+            const Req2 = (R2 * Ro) / (R2 + Ro); // R2 || Ro
+
+            // Calcular Picos (Fórmulas A)
+            const pico1 = Math.abs(-Vm * (Req1 / (Req1 + R2)));
+            const pico2 = Math.abs(-Vm * (Req2 / (R1 + Req2)));
+
+            // Determinar mayor y menor
+            const mayorPico = Math.max(pico1, pico2);
+            const menorPico = Math.min(pico1, pico2);
+
+            // Mostrar resultados
+            document.getElementById('mayor-pico').textContent = `${mayorPico.toFixed(2)} V`;
+            document.getElementById('menor-pico').textContent = `${menorPico.toFixed(2)} V`;
+        }
+    </script>
+
+</body>
+</html>
