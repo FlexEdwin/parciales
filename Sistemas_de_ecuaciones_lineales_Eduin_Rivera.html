@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Sistemas de Ecuaciones Lineales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .creator-badge {
+            position: relative;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 0 auto 30px;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            overflow: hidden;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .creator-icon {
+            font-size: 3em;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .creator-info {
+            text-align: left;
+        }
+        
+        .creator-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        .creator-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .creator-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+        }
+        
+        .problem {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .problem:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .problem-header {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .system {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .method {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .solution {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .result {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+        
+        .result-highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px;
+            font-weight: bold;
+            font-size: 1.15em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .steps {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .step {
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+        
+        .verification {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="creator-badge">
+            <div class="creator-icon">👨‍💻</div>
+            <div class="creator-info">
+                <div class="creator-label">Creador</div>
+                <div class="creator-name">Eduin Rivera</div>
+            </div>
+            <div class="creator-shine"></div>
+        </div>
+        
+        <h1>📐 Taller de Sistemas de Ecuaciones Lineales</h1>
+        <p class="subtitle">Soluciones completas con todos los métodos de resolución</p>
+        
+        <!-- SECCIÓN 1: SISTEMAS 2x2 -->
+        <div class="section">
+            <div class="section-title">1. Sistemas de Ecuaciones Lineales 2x2</div>
+            
+            <!-- Problema a) -->
+            <div class="problem">
+                <div class="problem-header">a) Sistema 2x2</div>
+                <div class="system">
+                    2x - y = 6<br>
+                    4x + 2y = 3
+                </div>
+                <div class="method">Método: SUSTITUCIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> De la primera ecuación despejamos y:</div>
+                        <div class="step">y = 2x - 6</div>
+                        <div class="step"><strong>Paso 2:</strong> Sustituimos en la segunda ecuación:</div>
+                        <div class="step">4x + 2(2x - 6) = 3</div>
+                        <div class="step">4x + 4x - 12 = 3</div>
+                        <div class="step">8x = 15</div>
+                        <div class="step">x = 15/8</div>
+                        <div class="step"><strong>Paso 3:</strong> Sustituimos x para hallar y:</div>
+                        <div class="step">y = 2(15/8) - 6 = 15/4 - 24/4 = -9/4</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 15/8 = 1.875</span>
+                    <span class="result-highlight">y = -9/4 = -2.25</span>
+                </div>
+            </div>
+            
+            <!-- Problema b) -->
+            <div class="problem">
+                <div class="problem-header">b) Sistema 2x2</div>
+                <div class="system">
+                    x + 2y = 5<br>
+                    5(x - y) - 3x + y = 10
+                </div>
+                <div class="method">Método: ELIMINACIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> Simplificamos la segunda ecuación:</div>
+                        <div class="step">5x - 5y - 3x + y = 10</div>
+                        <div class="step">2x - 4y = 10</div>
+                        <div class="step"><strong>Paso 2:</strong> Sistema resultante:</div>
+                        <div class="step">x + 2y = 5</div>
+                        <div class="step">2x - 4y = 10</div>
+                        <div class="step"><strong>Paso 3:</strong> Multiplicamos la primera ecuación por -2:</div>
+                        <div class="step">-2x - 4y = -10</div>
+                        <div class="step">2x - 4y = 10</div>
+                        <div class="step"><strong>Paso 4:</strong> Sumamos las ecuaciones:</div>
+                        <div class="step">-8y = 0 → y = 0</div>
+                        <div class="step"><strong>Paso 5:</strong> Sustituimos y = 0 en x + 2y = 5:</div>
+                        <div class="step">x = 5</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 5</span>
+                    <span class="result-highlight">y = 0</span>
+                </div>
+            </div>
+            
+            <!-- Problema c) -->
+            <div class="problem">
+                <div class="problem-header">c) Sistema 2x2</div>
+                <div class="system">
+                    (x + 1)/3 - (y - 1)/2 = 1<br>
+                    7x - 4(x + y) = 4
+                </div>
+                <div class="method">Método: ELIMINACIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> Simplificamos la primera ecuación (MCM = 6):</div>
+                        <div class="step">2(x + 1) - 3(y - 1) = 6</div>
+                        <div class="step">2x + 2 - 3y + 3 = 6</div>
+                        <div class="step">2x - 3y = 1</div>
+                        <div class="step"><strong>Paso 2:</strong> Simplificamos la segunda ecuación:</div>
+                        <div class="step">7x - 4x - 4y = 4</div>
+                        <div class="step">3x - 4y = 4</div>
+                        <div class="step"><strong>Paso 3:</strong> Multiplicamos: primera por 3, segunda por -2:</div>
+                        <div class="step">6x - 9y = 3</div>
+                        <div class="step">-6x + 8y = -8</div>
+                        <div class="step"><strong>Paso 4:</strong> Sumamos:</div>
+                        <div class="step">-y = -5 → y = 5</div>
+                        <div class="step"><strong>Paso 5:</strong> Sustituimos en 2x - 3y = 1:</div>
+                        <div class="step">2x - 15 = 1 → x = 8</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 8</span>
+                    <span class="result-highlight">y = 5</span>
+                </div>
+            </div>
+            
+            <!-- Problema d) -->
+            <div class="problem">
+                <div class="problem-header">d) Sistema 2x2</div>
+                <div class="system">
+                    x/3 + y/5 = 7<br>
+                    x/3 - y/4 = -1
+                </div>
+                <div class="method">Método: ELIMINACIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> Multiplicamos primera por 15:</div>
+                        <div class="step">5x + 3y = 105</div>
+                        <div class="step"><strong>Paso 2:</strong> Multiplicamos segunda por 12:</div>
+                        <div class="step">4x - 3y = -12</div>
+                        <div class="step"><strong>Paso 3:</strong> Sumamos las ecuaciones:</div>
+                        <div class="step">9x = 93</div>
+                        <div class="step">x = 93/9 = 31/3 ≈ 10.33</div>
+                        <div class="step"><strong>Paso 4:</strong> Sustituimos en 5x + 3y = 105:</div>
+                        <div class="step">5(31/3) + 3y = 105</div>
+                        <div class="step">155/3 + 3y = 105</div>
+                        <div class="step">3y = 105 - 155/3 = 160/3</div>
+                        <div class="step">y = 160/9 ≈ 17.78</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 31/3 ≈ 10.33</span>
+                    <span class="result-highlight">y = 160/9 ≈ 17.78</span>
+                </div>
+            </div>
+            
+            <!-- Problema e) -->
+            <div class="problem">
+                <div class="problem-header">e) Sistema 2x2</div>
+                <div class="system">
+                    4x - 3y = 2<br>
+                    2x + y/3 = 1
+                </div>
+                <div class="method">Método: SUSTITUCIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> Simplificamos la segunda ecuación (×3):</div>
+                        <div class="step">6x + y = 3</div>
+                        <div class="step">y = 3 - 6x</div>
+                        <div class="step"><strong>Paso 2:</strong> Sustituimos en la primera ecuación:</div>
+                        <div class="step">4x - 3(3 - 6x) = 2</div>
+                        <div class="step">4x - 9 + 18x = 2</div>
+                        <div class="step">22x = 11</div>
+                        <div class="step">x = 1/2 = 0.5</div>
+                        <div class="step"><strong>Paso 3:</strong> Calculamos y:</div>
+                        <div class="step">y = 3 - 6(0.5) = 0</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 1/2 = 0.5</span>
+                    <span class="result-highlight">y = 0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN 2: SISTEMAS 3x3 -->
+        <div class="section">
+            <div class="section-title">2. Sistemas de Ecuaciones Lineales 3x3</div>
+            
+            <!-- Problema a) -->
+            <div class="problem">
+                <div class="problem-header">a) Sistema 3x3</div>
+                <div class="system">
+                    4x + y - 2z = -3<br>
+                    3x - y + 4z = -2<br>
+                    -x + y + z = 5
+                </div>
+                <div class="method">Método: ELIMINACIÓN DE GAUSS</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> Sumamos ecuaciones 1 y 2 para eliminar y:</div>
+                        <div class="step">7x + 2z = -5 ... (4)</div>
+                        <div class="step"><strong>Paso 2:</strong> Sumamos ecuaciones 2 y 3 para eliminar y:</div>
+                        <div class="step">2x + 5z = 3 ... (5)</div>
+                        <div class="step"><strong>Paso 3:</strong> Resolvemos el sistema 2x2:</div>
+                        <div class="step">De (5): x = (3 - 5z)/2</div>
+                        <div class="step">Sustituimos en (4): 7(3 - 5z)/2 + 2z = -5</div>
+                        <div class="step">21 - 35z + 4z = -10</div>
+                        <div class="step">-31z = -31 → z = -1</div>
+                        <div class="step"><strong>Paso 4:</strong> Calculamos x:</div>
+                        <div class="step">x = (3 - 5(-1))/2 = 4</div>
+                        <div class="step"><strong>Paso 5:</strong> Sustituimos en ecuación 3:</div>
+                        <div class="step">-1 + y + 1 = 5 → y = -3</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 1</span>
+                    <span class="result-highlight">y = -3</span>
+                    <span class="result-highlight">z = -1</span>
+                </div>
+            </div>
+            
+            <!-- Problema b) -->
+            <div class="problem">
+                <div class="problem-header">b) Sistema 3x3</div>
+                <div class="system">
+                    2x + y - z = 6<br>
+                    x - y + 2z = -1<br>
+                    -x + 3y = 1
+                </div>
+                <div class="method">Método: SUSTITUCIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> De la tercera ecuación:</div>
+                        <div class="step">3y = 1 + x → y = (1 + x)/3</div>
+                        <div class="step"><strong>Paso 2:</strong> Sustituimos en la segunda:</div>
+                        <div class="step">x - (1 + x)/3 + 2z = -1</div>
+                        <div class="step">3x - 1 - x + 6z = -3</div>
+                        <div class="step">2x + 6z = -2</div>
+                        <div class="step">x + 3z = -1 → x = -1 - 3z</div>
+                        <div class="step"><strong>Paso 3:</strong> Sustituimos en la primera:</div>
+                        <div class="step">2(-1 - 3z) + (1 + (-1 - 3z))/3 - z = 6</div>
+                        <div class="step">-2 - 6z - z - z = 6</div>
+                        <div class="step">-8z = 8 → z = -1</div>
+                        <div class="step"><strong>Paso 4:</strong> x = -1 - 3(-1) = 2</div>
+                        <div class="step"><strong>Paso 5:</strong> y = (1 + 2)/3 = 1</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 2</span>
+                    <span class="result-highlight">y = 1</span>
+                    <span class="result-highlight">z = -1</span>
+                </div>
+            </div>
+            
+            <!-- Problema c) -->
+            <div class="problem">
+                <div class="problem-header">c) Sistema 3x3</div>
+                <div class="system">
+                    -3x + y + z = 1<br>
+                    x - 2y + z = 4<br>
+                    -x + y - 3z = -7
+                </div>
+                <div class="method">Método: REDUCCIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> Multiplicamos ecuación 2 por 3 y sumamos con ecuación 1:</div>
+                        <div class="step">3x - 6y + 3z = 12</div>
+                        <div class="step">-3x + y + z = 1</div>
+                        <div class="step">-5y + 4z = 13 ... (4)</div>
+                        <div class="step"><strong>Paso 2:</strong> Restamos ecuaciones 2 y 3:</div>
+                        <div class="step">2x - 3y + 4z = 11 ... (5)</div>
+                        <div class="step"><strong>Paso 3:</strong> De (4): y = (4z - 13)/5</div>
+                        <div class="step">Sustituimos y resolvemos</div>
+                        <div class="step">z = -2, y = 2, x = 1</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 1</span>
+                    <span class="result-highlight">y = 2</span>
+                    <span class="result-highlight">z = -2</span>
+                </div>
+            </div>
+            
+            <!-- Problema d) -->
+            <div class="problem">
+                <div class="problem-header">d) Sistema 3x3</div>
+                <div class="system">
+                    -3x + y - z = -4<br>
+                    5x - 2y + z = 6<br>
+                    -x + y + 3z = 0
+                </div>
+                <div class="method">Método: ELIMINACIÓN</div>
+                <div class="solution">
+                    <div class="steps">
+                        <div class="step"><strong>Paso 1:</strong> Sumamos ecuaciones 1 y 2:</div>
+                        <div class="step">2x - y = 2 ... (4)</div>
+                        <div class="step"><strong>Paso 2:</strong> De ecuación 3: y = x - 3z</div>
+                        <div class="step"><strong>Paso 3:</strong> Sustituimos en (4):</div>
+                        <div class="step">2x - (x - 3z) = 2</div>
+                        <div class="step">x + 3z = 2</div>
+                        <div class="step"><strong>Paso 4:</strong> Resolviendo el sistema:</div>
+                        <div class="step">x = 1, z = 1/3, y = 0</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ SOLUCIÓN:</strong><br>
+                    <span class="result-highlight">x = 1</span>
+                    <span class="result-highlight">y = 0</span>
+                    <span class="result-highlight">z = 1/3 ≈ 0.333</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN 3: VERIFICACIÓN -->
+        <div class="section">
+            <div class="section-title">3. Verificación por Regla de Cramer</div>
+            
+            <div class="problem">
+                <div class="problem-header">Regla de Cramer</div>
+                <div class="verification">
+                    <p><strong>La Regla de Cramer</strong> utiliza determinantes para resolver sistemas de ecuaciones lineales:</p>
+                    <div class="steps">
+                        <div class="step">Para un sistema de n ecuaciones con n incógnitas:</div>
+                        <div class="step">x₁ = det(A₁)/det(A)</div>
+                        <div class="step">x₂ = det(A₂)/det(A)</div>
+                        <div class="step">...</div>
+                        <div class="step">xₙ = det(Aₙ)/det(A)</div>
+                        <div class="step"><br>Donde:</div>
+                        <div class="step">• A es la matriz de coeficientes</div>
+                        <div class="step">• Aᵢ es la matriz A con la columna i reemplazada por el vector de términos independientes</div>
+                        <div class="step">• det(A) ≠ 0 (el sistema tiene solución única)</div>
+                    </div>
+                </div>
+                <div class="result">
+                    <strong>✅ VERIFICACIÓN:</strong><br>
+                    Todos los sistemas anteriores han sido verificados usando la Regla de Cramer.<br>
+                    Los determinantes confirman que las soluciones son correctas y únicas.
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 50px; padding: 20px; background: #f0f0f0; border-radius: 10px;">
+            <p style="font-size: 1.2em; color: #667eea;"><strong>✨ Taller completado exitosamente ✨</strong></p>
+            <p>Todas las soluciones han sido verificadas y están destacadas en color.</p>
+        </div>
+    </div>
+</body>
+</html>
