@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Parcial: Simplificación de Funciones Lógicas - Caldera de Leche</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+
+        .metadata {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.95em;
+        }
+
+        .metadata p {
+            margin: 5px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #2a5298;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .risk-conditions {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .risk-conditions ol {
+            margin-left: 20px;
+        }
+
+        .risk-conditions li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .equation {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-1 {
+            background: #ffebee !important;
+            font-weight: bold;
+        }
+
+        .kmap-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .kmap {
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .kmap td, .kmap th {
+            border: 2px solid #333;
+            padding: 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .kmap th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        .kmap .group-a {
+            background: rgba(255, 235, 59, 0.5);
+            border: 3px solid #FFA000;
+        }
+
+        .kmap .group-b {
+            background: rgba(76, 175, 80, 0.5);
+            border: 3px solid #2E7D32;
+        }
+
+        .kmap .overlap {
+            background: rgba(255, 152, 0, 0.6);
+            border: 3px solid #E65100;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #333;
+        }
+
+        .circuit-diagram {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .circuit-svg {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .component-table {
+            margin-top: 20px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .variables-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .variable-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #667eea;
+        }
+
+        .variable-card h4 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .kmap td, .kmap th {
+                padding: 10px;
+                min-width: 60px;
+                font-size: 0.9em;
+            }
+        }
+
+        .minterm {
+            font-size: 0.8em;
+            color: #666;
+            display: block;
+            margin-top: 5px;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .grouping-explanation {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .grouping-explanation h4 {
+            color: #00695c;
+            margin-bottom: 15px;
+        }
+
+        .grouping-explanation ul {
+            margin-left: 20px;
+        }
+
+        .grouping-explanation li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏭 Examen Parcial: Simplificación de Funciones Lógicas</h1>
+            <p class="subtitle">Sistema de Seguridad Automatizado para Caldera de Leche Industrial</p>
+            <p class="subtitle"><strong>Modelo L3000</strong></p>
+            
+            <div class="metadata">
+                <p><strong>Asignatura:</strong> Sistemas Digitales I / Fundamentos de Lógica Programable</p>
+                <p><strong>Tema:</strong> Álgebra de Boole y Mapas de Karnaugh (K-maps)</p>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- ENUNCIADO DEL PROBLEMA -->
+            <div class="section">
+                <h2>📋 Enunciado del Problema</h2>
+                <div class="problem-box">
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        Se diseña un sistema de seguridad automatizado para una <strong>Caldera de Leche Industrial (Modelo L3000)</strong>. 
+                        El sistema debe activar una <strong>Alarma de Riesgo (S)</strong>, que es una salida digital, basada en tres parámetros 
+                        de entrada de alto riesgo.
+                    </p>
+                </div>
+
+                <h3>Variables del Sistema</h3>
+                <div class="variables-box">
+                    <div class="variable-card">
+                        <h4>📊 Variables de Entrada</h4>
+                        <p><strong>L:</strong> Nivel de Leche (0=Bajo, 1=Alto)</p>
+                        <p><strong>T:</strong> Temperatura (0=Baja, 1=Alta)</p>
+                        <p><strong>C:</strong> Tapa (0=Abierta, 1=Cerrada)</p>
+                    </div>
+                    <div class="variable-card">
+                        <h4>⚠️ Variable de Salida</h4>
+                        <p><strong>S:</strong> Alarma de Riesgo</p>
+                        <p><strong>S = 1:</strong> Indica riesgo (Alarma activada)</p>
+                        <p><strong>S = 0:</strong> Estado seguro</p>
+                    </div>
+                </div>
+
+                <h3>Condiciones de Riesgo (S=1)</h3>
+                <div class="risk-conditions">
+                    <ol>
+                        <li>
+                            <strong>🔴 Riesgo por Presurización:</strong><br>
+                            Nivel de Leche Alto (<strong>L=1</strong>) y Tapa Cerrada (<strong>C=1</strong>)
+                        </li>
+                        <li>
+                            <strong>🔥 Riesgo por Quema:</strong><br>
+                            Temperatura Alta (<strong>T=1</strong>) y Nivel de Leche Bajo (<strong>L=0</strong>)
+                        </li>
+                        <li>
+                            <strong>💥 Riesgo por Ebullición Descontrolada:</strong><br>
+                            Nivel de Leche Alto (<strong>L=1</strong>), Temperatura Alta (<strong>T=1</strong>), y Tapa Abierta (<strong>C=0</strong>)
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PARTE A: ECUACIÓN INICIAL -->
+            <div class="section">
+                <h2>A. 📐 Ecuación Inicial: Suma de Productos (SOP)</h2>
+                
+                <div class="info-box">
+                    <h4>Desarrollo de la Ecuación Inicial</h4>
+                    <p>Traducimos cada condición de riesgo a su expresión lógica:</p>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <p><strong>1. Riesgo por Presurización (R₁):</strong></p>
+                    <div class="equation">R₁ = L · C</div>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <p><strong>2. Riesgo por Quema (R₂):</strong></p>
+                    <div class="equation">R₂ = L̄ · T</div>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <p><strong>3. Riesgo por Ebullición Descontrolada (R₃):</strong></p>
+                    <div class="equation">R₃ = L · T · C̄</div>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Ecuación Inicial del Sistema (SOP)</h4>
+                    <p>Al sumar (OR lógico) todas las condiciones de riesgo obtenemos:</p>
+                    <div class="equation" style="font-size: 1.4em; background: #e8f5e9; border-color: #4caf50;">
+                        S = (L · C) + (L̄ · T) + (L · T · C̄)
+                    </div>
+                    <p style="margin-top: 15px; text-align: center; font-style: italic;">
+                        Esta es la expresión inicial antes de simplificar
+                    </p>
+                </div>
+            </div>
+
+            <!-- PARTE B: TABLA DE VERDAD -->
+            <div class="section">
+                <h2>B. 📊 Tabla de Verdad</h2>
+                
+                <div class="info-box">
+                    <p>
+                        Construimos la tabla de verdad completa con todas las 8 combinaciones posibles de las variables de entrada 
+                        (L, T, C) y determinamos el estado de la alarma S según las condiciones de riesgo.
+                    </p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>L<br><small>(Nivel)</small></th>
+                            <th>T<br><small>(Temp.)</small></th>
+                            <th>C<br><small>(Tapa)</small></th>
+                            <th>S<br><small>(Alarma)</small></th>
+                            <th>Minterm</th>
+                            <th>Tipo de Riesgo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><strong>0</strong></td>
+                            <td>m₀</td>
+                            <td>✅ Estado Seguro</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td><strong>0</strong></td>
+                            <td>m₁</td>
+                            <td>✅ Estado Seguro</td>
+                        </tr>
+                        <tr class="highlight-1">
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td><strong style="color: red;">1</strong></td>
+                            <td>m₂</td>
+                            <td>🔥 Riesgo por Quema</td>
+                        </tr>
+                        <tr class="highlight-1">
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td><strong style="color: red;">1</strong></td>
+                            <td>m₃</td>
+                            <td>🔥 Riesgo por Quema</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><strong>0</strong></td>
+                            <td>m₄</td>
+                            <td>✅ Estado Seguro</td>
+                        </tr>
+                        <tr class="highlight-1">
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td><strong style="color: red;">1</strong></td>
+                            <td>m₅</td>
+                            <td>🔴 Riesgo por Presurización</td>
+                        </tr>
+                        <tr class="highlight-1">
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td><strong style="color: red;">1</strong></td>
+                            <td>m₆</td>
+                            <td>💥 Riesgo por Ebullición</td>
+                        </tr>
+                        <tr class="highlight-1">
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td><strong style="color: red;">1</strong></td>
+                            <td>m₇</td>
+                            <td>🔴 Riesgo por Presurización</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="success-box">
+                    <h4>Función Canónica (Suma de Minterms)</h4>
+                    <div class="equation">
+                        S(L, T, C) = Σ(2, 3, 5, 6, 7)
+                    </div>
+                    <p style="margin-top: 10px;">Los minterms resaltados en rojo representan las situaciones de riesgo donde la alarma debe activarse.</p>
+                </div>
+            </div>
+
+            <!-- PARTE C: MAPA DE KARNAUGH -->
+            <div class="section">
+                <h2>C. 🗺️ Mapa de Karnaugh (K-map)</h2>
+                
+                <div class="info-box">
+                    <p>
+                        El Mapa de Karnaugh es una herramienta gráfica para simplificar funciones booleanas. 
+                        Agrupamos los unos (minterms) de forma óptima para obtener la expresión más simple.
+                    </p>
+                </div>
+
+                <div class="kmap-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Mapa K de 3 Variables (L, T, C)</h3>
+                    
+                    <table class="kmap">
+                        <thead>
+                            <tr>
+                                <th>L \ TC</th>
+                                <th>00<br><small>T̄C̄</small></th>
+                                <th>01<br><small>T̄C</small></th>
+                                <th>11<br><small>TC</small></th>
+                                <th>10<br><small>TC̄</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>0<br><small>L̄</small></th>
+                                <td>0<span class="minterm">m₀</span></td>
+                                <td>0<span class="minterm">m₁</span></td>
+                                <td class="group-a"><strong>1</strong><span class="minterm">m₃</span></td>
+                                <td class="group-a"><strong>1</strong><span class="minterm">m₂</span></td>
+                            </tr>
+                            <tr>
+                                <th>1<br><small>L</small></th>
+                                <td>0<span class="minterm">m₄</span></td>
+                                <td class="group-b"><strong>1</strong><span class="minterm">m₅</span></td>
+                                <td class="overlap"><strong>1</strong><span class="minterm">m₇</span></td>
+                                <td class="group-a"><strong>1</strong><span class="minterm">m₆</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-box" style="background: rgba(255, 235, 59, 0.5); border-color: #FFA000;"></div>
+                            <span><strong>Grupo A (4 celdas):</strong> T = 1</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-box" style="background: rgba(76, 175, 80, 0.5); border-color: #2E7D32;"></div>
+                            <span><strong>Grupo B (2 celdas):</strong> L·C = 1</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-box" style="background: rgba(255, 152, 0, 0.6); border-color: #E65100;"></div>
+                            <span><strong>Solapamiento:</strong> Cubierto por ambos grupos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grouping-explanation">
+                    <h4>📌 Explicación de las Agrupaciones Óptimas</h4>
+                    <ul>
+                        <li>
+                            <strong>Grupo A (Amarillo) - Agrupación de 4 celdas:</strong><br>
+                            Agrupa los minterms <code>m₂, m₃, m₆, m₇</code>. Estos corresponden a todos los estados donde 
+                            <strong>T = 1</strong> (Temperatura Alta). La variable L cambia y la variable C cambia, por lo que se eliminan, 
+                            quedando solo <strong>T</strong>.
+                        </li>
+                        <li>
+                            <strong>Grupo B (Verde) - Agrupación de 2 celdas:</strong><br>
+                            Agrupa los minterms <code>m₅, m₇</code>. Estos corresponden a los estados donde 
+                            <strong>L = 1</strong> y <strong>C = 1</strong>. La variable T cambia, por lo que se elimina, 
+                            quedando <strong>L · C</strong>.
+                        </li>
+                        <li>
+                            <strong>Nota:</strong> El minterm m₇ está cubierto por ambos grupos (solapamiento), lo cual es válido 
+                            y ayuda a crear agrupaciones más grandes para simplificar más.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PARTE D: ECUACIÓN SIMPLIFICADA -->
+            <div class="section">
+                <h2>D. ⚡ Ecuación Simplificada</h2>
+                
+                <div class="info-box">
+                    <p>
+                        A partir de las agrupaciones del Mapa de Karnaugh, obtenemos los términos primos implicantes 
+                        y construimos la expresión simplificada en forma de Suma de Productos (SOP).
+                    </p>
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <h3>Términos de cada Agrupación:</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="background: rgba(255, 235, 59, 0.3); padding: 20px; border-radius: 8px; border: 2px solid #FFA000;">
+                            <h4 style="color: #F57C00;">Grupo A (4 celdas)</h4>
+                            <p><strong>Término:</strong> T</p>
+                            <p style="font-size: 0.9em; margin-top: 10px;">
+                                Cubre todos los estados con Temperatura Alta
+                            </p>
+                        </div>
+                        <div style="background: rgba(76, 175, 80, 0.3); padding: 20px; border-radius: 8px; border: 2px solid #2E7D32;">
+                            <h4 style="color: #1B5E20;">Grupo B (2 celdas)</h4>
+                            <p><strong>Término:</strong> L · C</p>
+                            <p style="font-size: 0.9em; margin-top: 10px;">
+                                Cubre estados con Nivel Alto y Tapa Cerrada
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-box" style="margin-top: 30px;">
+                    <h4>✅ Ecuación Simplificada Final (SOP Mínima)</h4>
+                    <div class="equation" style="font-size: 1.6em; background: #e8f5e9; border-color: #4caf50;">
+                        S = T + L · C
+                    </div>
+                    <p style="margin-top: 15px; text-align: center; font-size: 1.1em;">
+                        Esta es la expresión más simple para implementar el sistema de alarma
+                    </p>
+                </div>
+
+                <div class="warning-box" style="margin-top: 20px;">
+                    <h4>📊 Comparación: Ecuación Inicial vs. Simplificada</h4>
+                    <table style="background: white; margin-top: 15px;">
+                        <thead>
+                            <tr>
+                                <th>Aspecto</th>
+                                <th>Ecuación Inicial</th>
+                                <th>Ecuación Simplificada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Expresión</strong></td>
+                                <td>(L·C) + (L̄·T) + (L·T·C̄)</td>
+                                <td><strong>T + L·C</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Términos</strong></td>
+                                <td>3 términos</td>
+                                <td>2 términos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Compuertas AND</strong></td>
+                                <td>3 compuertas (2, 2 y 3 entradas)</td>
+                                <td>1 compuerta (2 entradas)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Compuertas OR</strong></td>
+                                <td>1 compuerta (3 entradas)</td>
+                                <td>1 compuerta (2 entradas)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Inversores</strong></td>
+                                <td>2 inversores</td>
+                                <td>0 inversores</td>
+                            </tr>
+                            <tr style="background: #e8f5e9;">
+                                <td><strong>Total Compuertas</strong></td>
+                                <td><strong>6</strong></td>
+                                <td><strong>2</strong> ✅</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 15px; text-align: center; font-weight: bold; color: #2E7D32;">
+                        ⚡ La simplificación reduce el circuito en un 67% (de 6 a 2 compuertas)
+                    </p>
+                </div>
+            </div>
+
+            <!-- PARTE E: CIRCUITO SIMPLIFICADO -->
+            <div class="section">
+                <h2>E. 🔌 Circuito Lógico Simplificado</h2>
+                
+                <div class="info-box">
+                    <p>
+                        Implementamos la función simplificada <strong>S = T + L · C</strong> usando compuertas lógicas básicas.
+                        El circuito requiere únicamente una compuerta AND y una compuerta OR.
+                    </p>
+                </div>
+
+                <div class="circuit-diagram">
+                    <h3 style="margin-bottom: 30px;">Diagrama del Circuito: S = T + (L · C)</h3>
+                    
+                    <svg class="circuit-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Definiciones -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#333" />
+                            </marker>
+                            
+                            <!-- Filtro de sombra -->
+                            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Fondo -->
+                        <rect width="800" height="400" fill="#f8f9fa" rx="10"/>
+                        
+                        <!-- Entradas -->
+                        <g>
+                            <!-- Entrada L -->
+                            <circle cx="50" cy="120" r="8" fill="#667eea" stroke="#333" stroke-width="2"/>
+                            <text x="30" y="110" font-size="20" font-weight="bold" fill="#1e3c72">L</text>
+                            <line x1="58" y1="120" x2="200" y2="120" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+                            
+                            <!-- Entrada C -->
+                            <circle cx="50" cy="180" r="8" fill="#667eea" stroke="#333" stroke-width="2"/>
+                            <text x="30" y="195" font-size="20" font-weight="bold" fill="#1e3c72">C</text>
+                            <line x1="58" y1="180" x2="200" y2="180" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+                            
+                            <!-- Entrada T -->
+                            <circle cx="50" cy="280" r="8" fill="#667eea" stroke="#333" stroke-width="2"/>
+                            <text x="30" y="295" font-size="20" font-weight="bold" fill="#1e3c72">T</text>
+                            <line x1="58" y1="280" x2="450" y2="280" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+                        </g>
+                        
+                        <!-- Compuerta AND (G1) -->
+                        <g filter="url(#shadow)">
+                            <!-- Cuerpo de la compuerta AND -->
+                            <path d="M 200,100 L 200,200 L 250,200 A 50,50 0 0,0 250,100 Z" 
+                                  fill="#4caf50" stroke="#2e7d32" stroke-width="3"/>
+                            <text x="215" y="155" font-size="18" font-weight="bold" fill="white">AND</text>
+                            <text x="215" y="175" font-size="14" fill="white">G1</text>
+                            
+                            <!-- Salida de AND -->
+                            <line x1="300" y1="150" x2="450" y2="150" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+                            <text x="340" y="140" font-size="16" fill="#2e7d32" font-weight="bold">L · C</text>
+                        </g>
+                        
+                        <!-- Compuerta OR (G2) -->
+                        <g filter="url(#shadow)">
+                            <!-- Cuerpo de la compuerta OR -->
+                            <path d="M 450,130 Q 450,100 480,100 L 550,100 Q 580,100 600,130 Q 600,160 600,200 Q 600,240 600,270 Q 580,300 550,300 L 480,300 Q 450,300 450,270 Q 470,200 450,130 Z" 
+                                  fill="#ff9800" stroke="#e65100" stroke-width="3"/>
+                            <text x="500" y="205" font-size="18" font-weight="bold" fill="white">OR</text>
+                            <text x="505" y="225" font-size="14" fill="white">G2</text>
+                        </g>
+                        
+                        <!-- Salida S -->
+                        <line x1="600" y1="200" x2="720" y2="200" stroke="#333" stroke-width="4" marker-end="url(#arrowhead)"/>
+                        <circle cx="730" cy="200" r="12" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+                        <text x="700" y="180" font-size="24" font-weight="bold" fill="#c0392b">S</text>
+                        <text x="660" y="230" font-size="14" fill="#e74c3c" font-weight="bold">Alarma</text>
+                        
+                        <!-- Etiquetas de señales -->
+                        <g font-size="12" fill="#555">
+                            <text x="100" y="115" font-style="italic">Nivel de Leche</text>
+                            <text x="100" y="175" font-style="italic">Estado de Tapa</text>
+                            <text x="100" y="275" font-style="italic">Temperatura</text>
+                        </g>
+                        
+                        <!-- Marco decorativo -->
+                        <rect x="10" y="10" width="780" height="380" fill="none" stroke="#667eea" stroke-width="2" rx="10"/>
+                    </svg>
+                </div>
+
+                <h3 style="margin-top: 40px;">Componentes del Circuito</h3>
+                <table class="component-table">
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Identificador</th>
+                            <th>Función Lógica</th>
+                            <th>Entradas</th>
+                            <th>Salida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Compuerta AND</strong></td>
+                            <td>G1</td>
+                            <td>Multiplicación Lógica (•)</td>
+                            <td>L, C</td>
+                            <td>L · C</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compuerta OR</strong></td>
+                            <td>G2</td>
+                            <td>Suma Lógica (+)</td>
+                            <td>T, (L · C)</td>
+                            <td>S = T + L · C</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="success-box" style="margin-top: 30px;">
+                    <h4>📝 Descripción del Funcionamiento</h4>
+                    <ol style="margin-left: 20px; line-height: 2;">
+                        <li>Las señales de entrada <strong>L</strong> (Nivel de Leche) y <strong>C</strong> (Tapa) se conectan a las entradas de la <strong>compuerta AND (G1)</strong>.</li>
+                        <li>La salida de G1 produce la señal <strong>L · C</strong>, que es verdadera (1) solo cuando ambas entradas son 1.</li>
+                        <li>La salida de G1 (<strong>L · C</strong>) y la entrada <strong>T</strong> (Temperatura) se conectan a las entradas de la <strong>compuerta OR (G2)</strong>.</li>
+                        <li>La salida de G2 es la señal de <strong>Alarma S</strong>, que se activa (S=1) cuando <strong>T=1</strong> O cuando <strong>L·C=1</strong> (o ambas).</li>
+                    </ol>
+                </div>
+
+                <div class="warning-box" style="margin-top: 20px;">
+                    <h4>⚡ Ventajas del Circuito Simplificado</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>✅ <strong>Menor costo:</strong> Solo 2 compuertas en lugar de 6</li>
+                        <li>✅ <strong>Menor consumo de energía:</strong> Menos componentes activos</li>
+                        <li>✅ <strong>Mayor velocidad:</strong> Menor retardo de propagación</li>
+                        <li>✅ <strong>Mayor fiabilidad:</strong> Menos puntos de fallo</li>
+                        <li>✅ <strong>Más fácil de implementar:</strong> Diseño más simple</li>
+                        <li>✅ <strong>Ocupa menos espacio:</strong> PCB más compacto</li>
+                    </ul>
+                </div>
+
+                <div class="info-box" style="margin-top: 20px;">
+                    <h4>🔧 Implementación Práctica</h4>
+                    <p style="line-height: 1.8;">
+                        Este circuito puede implementarse usando chips de circuitos integrados estándar:
+                    </p>
+                    <ul style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                        <li><strong>74LS08</strong> (Cuádruple compuerta AND de 2 entradas) - para G1</li>
+                        <li><strong>74LS32</strong> (Cuádruple compuerta OR de 2 entradas) - para G2</li>
+                    </ul>
+                    <p style="margin-top: 15px; line-height: 1.8;">
+                        Alternativamente, puede programarse en un <strong>CPLD</strong>, <strong>FPGA</strong> o 
+                        <strong>microcontrolador</strong> para mayor flexibilidad y capacidad de actualización.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CONCLUSIONES -->
+            <div class="section">
+                <h2>🎯 Conclusiones</h2>
+                
+                <div class="success-box">
+                    <h4>Resultados del Proceso de Simplificación</h4>
+                    <ol style="margin-left: 20px; line-height: 2;">
+                        <li>
+                            <strong>Función Inicial:</strong> Se identificaron 3 condiciones de riesgo que se expresaron como 
+                            suma de productos: <code>S = (L·C) + (L̄·T) + (L·T·C̄)</code>
+                        </li>
+                        <li>
+                            <strong>Análisis con K-map:</strong> Mediante el Mapa de Karnaugh se identificaron 2 agrupaciones óptimas 
+                            que cubren todos los minterms de riesgo (m₂, m₃, m₅, m₆, m₇).
+                        </li>
+                        <li>
+                            <strong>Función Simplificada:</strong> Se obtuvo la expresión mínima <code>S = T + L·C</code>, 
+                            reduciendo de 3 términos a 2 términos.
+                        </li>
+                        <li>
+                            <strong>Implementación:</strong> El circuito simplificado requiere solo 2 compuertas lógicas 
+                            (1 AND + 1 OR), en comparación con las 6 compuertas del circuito inicial.
+                        </li>
+                        <li>
+                            <strong>Beneficios:</strong> Reducción del 67% en componentes, menor costo, mayor velocidad 
+                            y mayor confiabilidad del sistema.
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="info-box" style="margin-top: 20px;">
+                    <h4>💡 Aprendizajes Clave</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>El Álgebra de Boole permite expresar problemas lógicos del mundo real de forma matemática</li>
+                        <li>Los Mapas de Karnaugh son herramientas visuales poderosas para minimizar funciones lógicas</li>
+                        <li>La simplificación de circuitos digitales tiene impactos directos en costo, rendimiento y confiabilidad</li>
+                        <li>Un diseño sistemático garantiza la corrección y optimización del sistema final</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p><strong>Empresa electrica y filtro 5</strong> • Ingeniería Electrónica</p>
+            <p>Sistemas Digitales I • 2025</p>
+            <p style="margin-top: 10px; font-size: 0.85em; opacity: 0.9;">
+                Desarrollado por: flex
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
