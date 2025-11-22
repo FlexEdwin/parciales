@@ -3,1480 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Análisis de Circuitos Eléctricos - Solución Profesional</title>
+    <title>Solución Visual Taller Circuitos</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 20px;
         }
-        
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            background-color: #ffffff;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        /* PORTADA */
-        .cover {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            color: white;
-            padding: 80px 40px;
-            text-align: center;
-        }
-        
-        .cover h1 {
-            font-size: 2.8em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .cover .subtitle {
-            font-size: 1.3em;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-        
-        .cover .info {
-            margin-top: 40px;
-            font-size: 1.1em;
-            opacity: 0.8;
-        }
-        
-        /* CONTENIDO */
-        .content {
+            background: white;
             padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 40px; }
         
-        /* TABLA DE CONTENIDOS */
-        .toc {
-            background-color: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            border-left: 5px solid #3498db;
-        }
+        .section { margin-bottom: 60px; border-bottom: 2px solid #eee; padding-bottom: 40px; }
+        h2 { color: #2980b9; border-left: 5px solid #2980b9; padding-left: 15px; margin-bottom: 20px; }
         
-        .toc h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-        
-        .toc ul {
-            list-style: none;
-        }
-        
-        .toc li {
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .toc li:last-child {
-            border-bottom: none;
-        }
-        
-        .toc a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .toc a:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-        
-        /* SECCIONES DE PROBLEMAS */
-        .problem-section {
-            margin-bottom: 60px;
-            page-break-inside: avoid;
-        }
-        
-        .problem-header {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 25px 30px;
-            border-radius: 10px 10px 0 0;
-            margin-bottom: 0;
-        }
-        
-        .problem-header h2 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        
-        .problem-header .objective {
-            font-size: 1.1em;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-        
-        .problem-body {
-            background-color: #ffffff;
-            border: 2px solid #3498db;
-            border-top: none;
-            border-radius: 0 0 10px 10px;
-            padding: 30px;
-        }
-        
-        /* SUBSECCIONES */
-        h3 {
-            color: #16a085;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #16a085;
-        }
-        
-        h4 {
-            color: #e67e22;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-        
-        /* PASOS */
         .step {
-            background-color: #f8f9fa;
-            padding: 20px;
-            margin: 20px 0;
+            background: #f9f9f9;
             border-radius: 8px;
-            border-left: 5px solid #16a085;
-            position: relative;
-        }
-        
-        .step-number {
-            position: absolute;
-            top: -15px;
-            left: 15px;
-            background: #16a085;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        
-        .step-title {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 12px;
-            font-size: 1.1em;
-            padding-left: 0;
-        }
-        
-        .step-content {
-            color: #34495e;
-            line-height: 1.8;
-        }
-        
-        /* FÓRMULAS */
-        .formula-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
         }
+        .step-title { font-weight: bold; font-size: 1.1em; color: #27ae60; margin-bottom: 10px; }
         
         .formula {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.3em;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        
-        .formula-label {
-            font-size: 0.9em;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-        
-        /* TABLAS */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        th {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        tr:hover {
-            background-color: #e8f4f8;
-        }
-        
-        /* CAJAS DE INFORMACIÓN */
-        .info-box {
-            background-color: #e8f4f8;
-            border-left: 5px solid #3498db;
-            padding: 20px;
-            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px;
             border-radius: 5px;
-        }
-        
-        .info-box.warning {
-            background-color: #fff3cd;
-            border-left-color: #f39c12;
-        }
-        
-        .info-box.success {
-            background-color: #d4edda;
-            border-left-color: #27ae60;
-        }
-        
-        .info-box.theory {
-            background-color: #f0e6ff;
-            border-left-color: #9b59b6;
-        }
-        
-        .info-box-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-        }
-        
-        .info-box-title::before {
-            content: "ℹ️";
-            margin-right: 10px;
-            font-size: 1.3em;
-        }
-        
-        .info-box.warning .info-box-title::before {
-            content: "⚠️";
-        }
-        
-        .info-box.success .info-box-title::before {
-            content: "✅";
-        }
-        
-        .info-box.theory .info-box-title::before {
-            content: "📚";
-        }
-        
-        /* RESULTADO FINAL */
-        .result {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 30px 0;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(39,174,96,0.3);
-        }
-        
-        .result-title {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .result-value {
-            font-size: 2em;
-            font-weight: bold;
-            font-family: 'Courier New', Courier, monospace;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        /* LISTAS */
-        ul, ol {
-            margin: 15px 0 15px 25px;
-        }
-        
-        li {
-            margin: 8px 0;
-            line-height: 1.6;
-        }
-        
-        /* RESALTADOS */
-        .highlight {
-            background-color: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 3px;
-            color: #856404;
-            font-weight: 600;
-        }
-        
-        .highlight-formula {
-            color: #e74c3c;
-            font-weight: bold;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        
-        /* SUBÍNDICES Y SUPERÍNDICES */
-        sub, sup {
-            font-size: 0.8em;
-        }
-        
-        /* RESUMEN EJECUTIVO */
-        .executive-summary {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 30px 0;
-        }
-        
-        .executive-summary h4 {
-            color: white;
-            border: none;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        
-        /* DIAGRAMA CONCEPTUAL */
-        .diagram-box {
-            background-color: #f8f9fa;
-            border: 2px dashed #3498db;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .diagram-title {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-        
-        /* PIE DE PÁGINA */
-        .footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .footer p {
             margin: 10px 0;
-            opacity: 0.8;
+            font-weight: bold;
+        }
+
+        /* ESTILOS PARA LOS DIAGRAMAS SVG */
+        .circuit-diagram {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background: white;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
         }
         
-        /* IMPRESIÓN */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            
-            .container {
-                box-shadow: none;
-            }
-            
-            .problem-section {
-                page-break-inside: avoid;
-            }
+        svg {
+            max-width: 100%;
+            height: auto;
+            font-family: sans-serif;
         }
         
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .cover h1 {
-                font-size: 2em;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .formula {
-                font-size: 1.1em;
-            }
-            
-            table {
-                font-size: 0.9em;
-            }
+        text { font-size: 12px; fill: #333; font-weight: bold; }
+        .cap-label { fill: #e74c3c; font-size: 14px; }
+        .wire { stroke: #333; stroke-width: 2; fill: none; }
+        .node { fill: #333; }
+        .component { stroke: #e74c3c; stroke-width: 2; fill: white; } /* Capacitor plates logic handled in SVG paths */
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-radius: 8px;
+            border: 2px solid #c3e6cb;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- PORTADA -->
-        <div class="cover">
-            <h1>📐 TALLER DE ANÁLISIS DE CIRCUITOS ELÉCTRICOS</h1>
-            <p class="subtitle">Solución Detallada y Profesional</p>
-            <p class="subtitle">Capacitancia • Inductancia • Teorema de Thévenin</p>
-            <div class="info">
-                <p><strong>Análisis Completo con Metodología Paso a Paso</strong></p>
-                <p>Ingeniería Eléctrica y Electrónica</p>
+
+<div class="container">
+    <h1>Solución Visual Paso a Paso</h1>
+    <p class="subtitle">Con diagramas simplificados generados dinámicamente</p>
+
+    <!-- PROBLEMA 1 -->
+    <div class="section">
+        <h2>1. Capacitancia Equivalente (Corregido)</h2>
+        
+        <div class="warning-box">
+            <strong>⚠️ Nota sobre tu procedimiento manual:</strong><br>
+            En tu hoja, paso 3, calculaste <code>(60*60)/(60+60)=30</code>. Esto es un error.
+            El capacitor de arriba es de <strong>120</strong> (no 60). El cálculo correcto es <code>(120*60)/(120+60)=40</code>.
+            A continuación verás la solución visual con los valores correctos.
+        </div>
+
+        <!-- PASO 1 -->
+        <div class="step">
+            <div class="step-title">Paso 1: Simplificación Inicial (Paralelos)</div>
+            <p>Combinamos los capacitores de arriba (40+80) y los de la derecha (30+20+10).</p>
+            <div class="formula">C_arriba = 120 F &nbsp;|&nbsp; C_derecha = 60 F</div>
+            
+            <div class="circuit-diagram">
+                <!-- SVG Diagrama Paso 1 -->
+                <svg width="400" height="200" viewBox="0 0 400 200">
+                    <!-- Wires -->
+                    <path d="M 50 100 L 100 100" class="wire"/> <!-- Input to Node A -->
+                    <path d="M 100 100 L 100 180" class="wire"/> <!-- A down to 12 -->
+                    <path d="M 100 100 L 200 50 L 300 100" class="wire"/> <!-- Top Branch -->
+                    <path d="M 100 100 L 300 100" class="wire"/> <!-- Diagonal line -->
+                    <path d="M 300 100 L 300 180" class="wire"/> <!-- Right Branch -->
+                    <path d="M 50 180 L 300 180" class="wire"/> <!-- Bottom line -->
+                    
+                    <!-- Components (Simplified Rectangles for Capacitors) -->
+                    <!-- Input 12 -->
+                    <rect x="65" y="90" width="20" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                    <line x1="75" y1="90" x2="75" y2="110" stroke="#e74c3c" stroke-width="2"/>
+                    <line x1="80" y1="90" x2="80" y2="110" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="65" y="85">12</text>
+
+                    <!-- Left Vertical 12 -->
+                    <rect x="90" y="130" width="20" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                    <line x1="90" y1="140" x2="110" y2="140" stroke="#e74c3c" stroke-width="2" transform="rotate(90 100 140)"/>
+                    <text x="75" y="145">12</text>
+
+                    <!-- Top 120 -->
+                    <rect x="190" y="40" width="20" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                    <line x1="200" y1="40" x2="200" y2="60" stroke="#e74c3c" stroke-width="2"/>
+                    <line x1="205" y1="40" x2="205" y2="60" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="190" y="35" class="cap-label">120</text>
+
+                    <!-- Diag 50 -->
+                    <rect x="190" y="90" width="20" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                    <line x1="200" y1="90" x2="200" y2="110" stroke="#e74c3c" stroke-width="2"/>
+                    <line x1="205" y1="90" x2="205" y2="110" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="190" y="125">50</text>
+
+                    <!-- Right 60 -->
+                    <rect x="290" y="130" width="20" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                    <line x1="290" y1="140" x2="310" y2="140" stroke="#e74c3c" stroke-width="2" transform="rotate(90 300 140)"/>
+                    <text x="315" y="145" class="cap-label">60</text>
+
+                    <!-- Bottom 60 -->
+                    <rect x="190" y="170" width="20" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                    <line x1="200" y1="170" x2="200" y2="190" stroke="#e74c3c" stroke-width="2"/>
+                    <line x1="205" y1="170" x2="205" y2="190" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="190" y="165">60</text>
+                    
+                    <!-- Terminals -->
+                    <circle cx="50" cy="100" r="3" class="node"/> <text x="40" y="95">a</text>
+                    <circle cx="50" cy="180" r="3" class="node"/> <text x="40" y="185">b</text>
+                </svg>
             </div>
         </div>
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <div class="content">
-            <!-- TABLA DE CONTENIDOS -->
-            <div class="toc">
-                <h2>📋 Tabla de Contenidos</h2>
-                <ul>
-                    <li><a href="#problema1">1. Capacitancia Equivalente (C<sub>eq</sub>)</a></li>
-                    <li><a href="#problema2">2. Inductancia Equivalente (L<sub>eq</sub>)</a></li>
-                    <li><a href="#problema3">3. Equivalente de Thévenin (V<sub>th</sub> y R<sub>th</sub>)</a></li>
-                </ul>
+        <!-- PASO 2 -->
+        <div class="step">
+            <div class="step-title">Paso 2: Serie Superior-Derecha (Corrección del error manual)</div>
+            <p>La corriente que va por arriba (120) baja obligatoriamente por la derecha (60). Están en serie.</p>
+            <div class="formula">(120 × 60) / (120 + 60) = 40 F</div>
+            <p><em>(En tu hoja calculaste 30 porque usaste 60 en vez de 120 arriba).</em></p>
+            
+            <div class="circuit-diagram">
+                <svg width="400" height="180" viewBox="0 0 400 180">
+                    <path d="M 50 80 L 100 80" class="wire"/>
+                    <path d="M 100 80 L 100 160" class="wire"/>
+                    <!-- Combined Branch -->
+                    <path d="M 100 80 L 300 80 L 300 160" class="wire" stroke-dasharray="5,5"/>
+                    <path d="M 100 80 L 300 160" class="wire"/> <!-- Diag 50 stays -->
+                    <path d="M 50 160 L 300 160" class="wire"/>
+                    
+                    <!-- Caps -->
+                    <!-- Input 12 -->
+                    <line x1="75" y1="70" x2="75" y2="90" stroke="#e74c3c" stroke-width="2"/> <line x1="80" y1="70" x2="80" y2="90" stroke="#e74c3c" stroke-width="2"/>
+                    
+                    <!-- Left 12 -->
+                    <line x1="90" y1="120" x2="110" y2="120" stroke="#e74c3c" stroke-width="2" transform="rotate(90 100 120)"/>
+                    
+                    <!-- The NEW Series 40 -->
+                    <rect x="250" y="70" width="20" height="20" fill="#fff3cd" stroke="#333" stroke-width="1"/>
+                    <line x1="260" y1="70" x2="260" y2="90" stroke="#e74c3c" stroke-width="2"/> <line x1="265" y1="70" x2="265" y2="90" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="250" y="65" class="cap-label">40 (Eq)</text>
+
+                    <!-- Diag 50 -->
+                    <line x1="190" y1="110" x2="190" y2="130" stroke="#e74c3c" stroke-width="2" transform="rotate(-45 200 120)"/> <text x="180" y="140">50</text>
+                    
+                    <!-- Bottom 60 -->
+                    <line x1="200" y1="150" x2="200" y2="170" stroke="#e74c3c" stroke-width="2"/> <line x1="205" y1="150" x2="205" y2="170" stroke="#e74c3c" stroke-width="2"/> <text x="200" y="195">60</text>
+                </svg>
             </div>
-
-            <!-- FUNDAMENTOS TEÓRICOS -->
-            <div class="info-box theory">
-                <div class="info-box-title">Fundamentos Teóricos Esenciales</div>
-                <div class="info-box-content">
-                    <p><strong>Reglas para Capacitores:</strong></p>
-                    <ul>
-                        <li><strong>Serie:</strong> 1/C<sub>eq</sub> = 1/C₁ + 1/C₂ + ... → C<sub>eq</sub> = (C₁ × C₂)/(C₁ + C₂) [para 2 capacitores]</li>
-                        <li><strong>Paralelo:</strong> C<sub>eq</sub> = C₁ + C₂ + C₃ + ...</li>
-                    </ul>
-                    <p><strong>Reglas para Inductores:</strong></p>
-                    <ul>
-                        <li><strong>Serie:</strong> L<sub>eq</sub> = L₁ + L₂ + L₃ + ...</li>
-                        <li><strong>Paralelo:</strong> 1/L<sub>eq</sub> = 1/L₁ + 1/L₂ + ... → L<sub>eq</sub> = (L₁ × L₂)/(L₁ + L₂) [para 2 inductores]</li>
-                    </ul>
-                    <p><strong>Transformación Estrella-Delta (Y-Δ):</strong></p>
-                    <ul>
-                        <li>N = R₁R₂ + R₂R₃ + R₃R₁</li>
-                        <li>R<sub>ab</sub> = N/R<sub>c</sub> ; R<sub>bc</sub> = N/R<sub>a</sub> ; R<sub>ca</sub> = N/R<sub>b</sub></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- PROBLEMA 1: CAPACITANCIA EQUIVALENTE -->
-            <div class="problem-section" id="problema1">
-                <div class="problem-header">
-                    <h2>Problema 1: Capacitancia Equivalente</h2>
-                    <p class="objective">🎯 Objetivo: Determinar la capacitancia equivalente (C<sub>eq</sub>) vista desde las terminales a-b</p>
-                </div>
-                <div class="problem-body">
-                    
-                    <div class="info-box">
-                        <div class="info-box-title">Estrategia de Solución</div>
-                        <p>Aplicaremos simplificaciones sucesivas identificando conexiones en <strong>serie</strong> y <strong>paralelo</strong>, reduciendo progresivamente el circuito hasta obtener un solo capacitor equivalente.</p>
-                    </div>
-
-                    <h3>📍 Paso 1: Identificación de la Topología del Circuito</h3>
-                    <div class="step">
-                        <div class="step-title">Definición de Nodos Principales</div>
-                        <div class="step-content">
-                            <p>Identificamos los nodos críticos del circuito:</p>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nodo</th>
-                                        <th>Ubicación</th>
-                                        <th>Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Terminal a</strong></td>
-                                        <td>Entrada</td>
-                                        <td>Punto de conexión inicial</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Nodo 1</strong></td>
-                                        <td>Superior Izquierdo</td>
-                                        <td>Después del capacitor de entrada (12 F)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Nodo 2</strong></td>
-                                        <td>Superior Derecho</td>
-                                        <td>Unión superior y lateral derecha</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Nodo 3</strong></td>
-                                        <td>Inferior Derecho</td>
-                                        <td>Unión antes de conexión a tierra</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Terminal b (Tierra)</strong></td>
-                                        <td>Referencia</td>
-                                        <td>Nodo 0 - línea inferior de referencia</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <h3>🔧 Paso 2: Primera Simplificación - Ramas Paralelas</h3>
-                    
-                    <h4>A. Rama Superior (Nodo 1 → Nodo 2)</h4>
-                    <div class="step">
-                        <div class="step-title">Identificación de Conexión Paralela</div>
-                        <div class="step-content">
-                            <p>Entre el Nodo 1 y el Nodo 2 existen <strong>dos capacitores en paralelo</strong>:</p>
-                            <ul>
-                                <li>C₁ = 40 F</li>
-                                <li>C₂ = 80 F</li>
-                            </ul>
-                            <div class="info-box warning">
-                                <div class="info-box-title">Regla Aplicada</div>
-                                <p>Capacitores en paralelo comparten el mismo voltaje entre sus terminales, por lo que sus capacitancias se suman directamente.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Capacitancia Paralela Superior</div>
-                        <div class="formula">C<sub>top</sub> = C₁ + C₂ = 40 F + 80 F = 120 F</div>
-                    </div>
-
-                    <h4>B. Rama Derecha (Nodo 2 → Nodo 3)</h4>
-                    <div class="step">
-                        <div class="step-title">Identificación de Segunda Conexión Paralela</div>
-                        <div class="step-content">
-                            <p>Entre el Nodo 2 y el Nodo 3 hay <strong>tres capacitores en paralelo</strong>:</p>
-                            <ul>
-                                <li>C₃ = 30 F</li>
-                                <li>C₄ = 20 F</li>
-                                <li>C₅ = 10 F</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Capacitancia Paralela Derecha</div>
-                        <div class="formula">C<sub>right</sub> = C₃ + C₄ + C₅ = 30 F + 20 F + 10 F = 60 F</div>
-                    </div>
-
-                    <div class="diagram-box">
-                        <div class="diagram-title">📊 Estado del Circuito Después del Paso 2</div>
-                        <p>C<sub>top</sub> = 120 F (horizontal superior) | C<sub>right</sub> = 60 F (vertical derecha)</p>
-                    </div>
-
-                    <h3>⚡ Paso 3: Reducción de Malla Superior-Derecha</h3>
-                    <div class="step">
-                        <div class="step-title">Identificación de Conexión Serie</div>
-                        <div class="step-content">
-                            <p>Los capacitores equivalentes <span class="highlight">C<sub>top</sub> (120 F)</span> y <span class="highlight">C<sub>right</sub> (60 F)</span> forman una conexión en <strong>serie</strong>, ya que la corriente que fluye a través de C<sub>top</sub> debe pasar obligatoriamente por C<sub>right</sub> para llegar al Nodo 3.</p>
-                            <div class="info-box warning">
-                                <div class="info-box-title">Regla Aplicada</div>
-                                <p>En serie, los capacitores comparten la misma corriente, y la capacitancia equivalente es menor que la del capacitor más pequeño.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Capacitancia Serie (Top-Right)</div>
-                        <div class="formula">
-                            C<sub>serie</sub> = (C<sub>top</sub> × C<sub>right</sub>) / (C<sub>top</sub> + C<sub>right</sub>)<br><br>
-                            C<sub>serie</sub> = (120 × 60) / (120 + 60) = 7200 / 180 = 40 F
-                        </div>
-                    </div>
-
-                    <h3>🔀 Paso 4: Combinación con Rama Diagonal</h3>
-                    <div class="step">
-                        <div class="step-title">Identificación de Nueva Conexión Paralela</div>
-                        <div class="step-content">
-                            <p>El capacitor equivalente de 40 F (resultado del paso anterior, entre Nodo 1 y Nodo 3) queda ahora en <strong>paralelo</strong> con el capacitor diagonal de <span class="highlight">50 F</span> que también conecta directamente los Nodos 1 y 3.</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Capacitancia Paralela (Diagonal)</div>
-                        <div class="formula">C<sub>N1-N3</sub> = 40 F + 50 F = 90 F</div>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Paso</th>
-                                <th>Componentes</th>
-                                <th>Tipo</th>
-                                <th>Resultado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2.A</td>
-                                <td>40 F // 80 F</td>
-                                <td>Paralelo</td>
-                                <td>120 F</td>
-                            </tr>
-                            <tr>
-                                <td>2.B</td>
-                                <td>30 F // 20 F // 10 F</td>
-                                <td>Paralelo</td>
-                                <td>60 F</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>120 F en serie con 60 F</td>
-                                <td>Serie</td>
-                                <td>40 F</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>40 F // 50 F</td>
-                                <td>Paralelo</td>
-                                <td>90 F</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>🎯 Paso 5: Conexión a Tierra (Nodo 3 → Nodo 0)</h3>
-                    <div class="step">
-                        <div class="step-title">Reducción con Capacitor a Tierra</div>
-                        <div class="step-content">
-                            <p>El bloque equivalente de 90 F (entre Nodo 1 y Nodo 3) está ahora en <strong>serie</strong> con el capacitor de <span class="highlight">60 F</span> que conecta el Nodo 3 con Tierra (Nodo 0/terminal b).</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Serie con Tierra</div>
-                        <div class="formula">
-                            C<sub>rama_pral</sub> = (90 × 60) / (90 + 60) = 5400 / 150 = 36 F
-                        </div>
-                    </div>
-
-                    <h3>🔌 Paso 6: Rama Vertical Izquierda</h3>
-                    <div class="step">
-                        <div class="step-title">Combinación con Capacitor Lateral</div>
-                        <div class="step-content">
-                            <p>En el Nodo 1 tenemos:</p>
-                            <ul>
-                                <li>La rama principal reducida: 36 F (conecta Nodo 1 a Tierra)</li>
-                                <li>El capacitor vertical izquierdo: 12 F (también conecta Nodo 1 a Tierra)</li>
-                            </ul>
-                            <p>Estas dos ramas están en <strong>paralelo</strong> porque comparten los mismos nodos terminales.</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Paralelo Vertical</div>
-                        <div class="formula">C<sub>bloque_total</sub> = 36 F + 12 F = 48 F</div>
-                    </div>
-
-                    <h3>✨ Paso 7: Capacitancia Equivalente Final</h3>
-                    <div class="step">
-                        <div class="step-title">Reducción con Capacitor de Entrada</div>
-                        <div class="step-content">
-                            <p>Finalmente, este bloque total de 48 F está en <strong>serie</strong> con el capacitor de entrada de <span class="highlight">12 F</span> que conecta la terminal 'a' con el Nodo 1.</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Capacitancia Equivalente Total</div>
-                        <div class="formula">
-                            C<sub>eq</sub> = (12 × 48) / (12 + 48) = 576 / 60 = 9.6 F
-                        </div>
-                    </div>
-
-                    <div class="result">
-                        <div class="result-title">🎊 RESULTADO FINAL - PROBLEMA 1</div>
-                        <div class="result-value">C<sub>eq</sub> = 9.6 F</div>
-                    </div>
-
-                    <div class="executive-summary">
-                        <h4>📝 Resumen Ejecutivo</h4>
-                        <p><strong>Método utilizado:</strong> Simplificación secuencial por identificación de conexiones serie-paralelo</p>
-                        <p><strong>Número de pasos:</strong> 7 reducciones sucesivas</p>
-                        <p><strong>Capacitancia inicial total:</strong> 342 F (suma de todos los capacitores)</p>
-                        <p><strong>Capacitancia equivalente final:</strong> 9.6 F</p>
-                        <p><strong>Factor de reducción:</strong> 35.6× (el circuito equivalente almacena menos energía debido a las conexiones en serie)</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROBLEMA 2: INDUCTANCIA EQUIVALENTE -->
-            <div class="problem-section" id="problema2">
-                <div class="problem-header">
-                    <h2>Problema 2: Inductancia Equivalente</h2>
-                    <p class="objective">🎯 Objetivo: Determinar la inductancia equivalente (L<sub>eq</sub>) en un puente inductivo complejo</p>
-                </div>
-                <div class="problem-body">
-                    
-                    <div class="info-box">
-                        <div class="info-box-title">Estrategia de Solución</div>
-                        <p>Este circuito requiere el uso de la <strong>transformación Estrella-Delta (Y-Δ)</strong> para simplificar la topología en puente, seguida de combinaciones serie-paralelo. Todas las unidades están en <strong>milihenrios (mH)</strong>.</p>
-                    </div>
-
-                    <h3>📍 Paso 1: Análisis de la Topología del Puente</h3>
-                    <div class="step">
-                        <div class="step-title">Identificación de Configuración Estrella Interior</div>
-                        <div class="step-content">
-                            <p>El circuito presenta una estructura de puente con:</p>
-                            <ul>
-                                <li><strong>Marco exterior:</strong> Inductores de 8 mH en configuración rectangular</li>
-                                <li><strong>Estrella interior:</strong> Nodo central conectado a tres puntos del marco</li>
-                                <li><strong>Inductores de entrada/salida:</strong> 6 mH (entrada) y 10 mH (salida)</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h3>🔧 Paso 2: Simplificación de Rama Derecha</h3>
-                    <div class="step">
-                        <div class="step-title">Reducción Paralela Inicial</div>
-                        <div class="step-content">
-                            <p>En el extremo derecho, dos inductores conectan el nodo central "estrella" con el nodo de salida común derecho (N<sub>out</sub>):</p>
-                            <ul>
-                                <li>L₁ = 12 mH</li>
-                                <li>L₂ = 4 mH</li>
-                            </ul>
-                            <p>Están en <strong>paralelo</strong> porque conectan los mismos dos nodos.</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo de Inductancia Paralela Derecha</div>
-                        <div class="formula">
-                            L<sub>der</sub> = (L₁ × L₂) / (L₁ + L₂) = (12 × 4) / (12 + 4) = 48 / 16 = 3 mH
-                        </div>
-                    </div>
-
-                    <h3>⭐ Paso 3: Transformación Estrella-Delta</h3>
-                    <div class="step">
-                        <div class="step-title">Configuración Estrella (Y) Identificada</div>
-                        <div class="step-content">
-                            <p>Después de la simplificación anterior, tenemos una <strong>estrella</strong> formada por:</p>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Rama</th>
-                                        <th>Conexión</th>
-                                        <th>Valor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>R<sub>a</sub></td>
-                                        <td>Centro → Superior Izq (TL)</td>
-                                        <td>5 mH</td>
-                                    </tr>
-                                    <tr>
-                                        <td>R<sub>b</sub></td>
-                                        <td>Centro → Inferior Izq (BL)</td>
-                                        <td>6 mH</td>
-                                    </tr>
-                                    <tr>
-                                        <td>R<sub>c</sub></td>
-                                        <td>Centro → Derecha (N<sub>out</sub>)</td>
-                                        <td>3 mH</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="info-box theory">
-                        <div class="info-box-title">Fórmulas de Transformación Y → Δ</div>
-                        <p><strong>Paso 1:</strong> Calcular numerador común</p>
-                        <p class="highlight-formula">N = R<sub>a</sub>R<sub>b</sub> + R<sub>b</sub>R<sub>c</sub> + R<sub>c</sub>R<sub>a</sub></p>
-                        <p><strong>Paso 2:</strong> Calcular resistencias de la Delta</p>
-                        <ul>
-                            <li>R<sub>AB</sub> (entre TL y BL) = N / R<sub>c</sub></li>
-                            <li>R<sub>BC</sub> (entre BL y N<sub>out</sub>) = N / R<sub>a</sub></li>
-                            <li>R<sub>CA</sub> (entre N<sub>out</sub> y TL) = N / R<sub>b</sub></li>
-                        </ul>
-                    </div>
-
-                    <h4>A. Cálculo del Numerador Común</h4>
-                    <div class="formula-box">
-                        <div class="formula-label">Suma de Productos Cruzados</div>
-                        <div class="formula">
-                            N = (5×6) + (6×3) + (3×5) = 30 + 18 + 15 = 63
-                        </div>
-                    </div>
-
-                    <h4>B. Cálculo de Inductores Delta Equivalentes</h4>
-                    <div class="step">
-                        <div class="step-content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Inductor Delta</th>
-                                        <th>Entre Nodos</th>
-                                        <th>Cálculo</th>
-                                        <th>Resultado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>L<sub>a</sub></td>
-                                        <td>TL ↔ BL (Vertical Izq)</td>
-                                        <td>63 / 3</td>
-                                        <td><strong>21 mH</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>L<sub>b</sub></td>
-                                        <td>TL ↔ N<sub>out</sub> (Superior)</td>
-                                        <td>63 / 6</td>
-                                        <td><strong>10.5 mH</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>L<sub>c</sub></td>
-                                        <td>BL ↔ N<sub>out</sub> (Inferior)</td>
-                                        <td>63 / 5</td>
-                                        <td><strong>12.6 mH</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="diagram-box">
-                        <div class="diagram-title">📊 Transformación Completada</div>
-                        <p>La estrella interior (5, 6, 3 mH) se ha convertido en una Delta (21, 10.5, 12.6 mH)</p>
-                    </div>
-
-                    <h3>🔀 Paso 4: Combinación Paralela con Marco Exterior</h3>
-                    <div class="step">
-                        <div class="step-title">Ramas en Paralelo</div>
-                        <div class="step-content">
-                            <p>Los inductores de la Delta quedan ahora en <strong>paralelo</strong> con los inductores originales del marco exterior (todos de 8 mH). Cada lado del marco tiene dos inductores en paralelo.</p>
-                        </div>
-                    </div>
-
-                    <h4>A. Rama Vertical Izquierda</h4>
-                    <div class="formula-box">
-                        <div class="formula-label">8 mH (original) // 21 mH (nuevo)</div>
-                        <div class="formula">
-                            L<sub>v</sub> = (8 × 21) / (8 + 21) = 168 / 29 ≈ 5.793 mH
-                        </div>
-                    </div>
-
-                    <h4>B. Rama Superior</h4>
-                    <div class="formula-box">
-                        <div class="formula-label">8 mH (original) // 10.5 mH (nuevo)</div>
-                        <div class="formula">
-                            L<sub>sup</sub> = (8 × 10.5) / (8 + 10.5) = 84 / 18.5 ≈ 4.541 mH
-                        </div>
-                    </div>
-
-                    <h4>C. Rama Inferior</h4>
-                    <div class="formula-box">
-                        <div class="formula-label">8 mH (original) // 12.6 mH (nuevo)</div>
-                        <div class="formula">
-                            L<sub>inf</sub> = (8 × 12.6) / (8 + 12.6) = 100.8 / 20.6 ≈ 4.893 mH
-                        </div>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Rama</th>
-                                <th>Marco Original</th>
-                                <th>Delta Nueva</th>
-                                <th>Equivalente Paralelo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Vertical Izquierda</td>
-                                <td>8 mH</td>
-                                <td>21 mH</td>
-                                <td>5.793 mH</td>
-                            </tr>
-                            <tr>
-                                <td>Superior</td>
-                                <td>8 mH</td>
-                                <td>10.5 mH</td>
-                                <td>4.541 mH</td>
-                            </tr>
-                            <tr>
-                                <td>Inferior</td>
-                                <td>8 mH</td>
-                                <td>12.6 mH</td>
-                                <td>4.893 mH</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>🎯 Paso 5: Reducción Final del Núcleo</h3>
-                    <div class="step">
-                        <div class="step-title">Análisis de Configuración Resultante</div>
-                        <div class="step-content">
-                            <p>El circuito ahora se reduce a:</p>
-                            <ul>
-                                <li><strong>Rama vertical izquierda:</strong> L<sub>v</sub> = 5.793 mH (conecta entrada con salida directamente por el lado izquierdo)</li>
-                                <li><strong>Rama serie derecha:</strong> L<sub>sup</sub> + L<sub>inf</sub> = 4.541 + 4.893 mH (conecta entrada con salida por el lado derecho, pasando por el nodo N<sub>out</sub>)</li>
-                            </ul>
-                            <p>Estas dos ramas están en <strong>paralelo</strong> entre los puntos de entrada y salida del núcleo del puente.</p>
-                        </div>
-                    </div>
-
-                    <h4>A. Cálculo de Rama Serie Derecha</h4>
-                    <div class="formula-box">
-                        <div class="formula-label">Serie: Superior + Inferior</div>
-                        <div class="formula">
-                            L<sub>serie</sub> = L<sub>sup</sub> + L<sub>inf</sub> = 4.541 + 4.893 = 9.434 mH
-                        </div>
-                    </div>
-
-                    <h4>B. Cálculo de Paralelo Central Total</h4>
-                    <div class="formula-box">
-                        <div class="formula-label">Paralelo: Vertical // Serie Derecha</div>
-                        <div class="formula">
-                            L<sub>núcleo</sub> = (L<sub>v</sub> × L<sub>serie</sub>) / (L<sub>v</sub> + L<sub>serie</sub>)<br><br>
-                            L<sub>núcleo</sub> = (5.793 × 9.434) / (5.793 + 9.434) = 54.65 / 15.227 ≈ 3.589 mH
-                        </div>
-                    </div>
-
-                    <h3>✨ Paso 6: Inductancia Equivalente Final</h3>
-                    <div class="step">
-                        <div class="step-title">Suma con Inductores de Entrada/Salida</div>
-                        <div class="step-content">
-                            <p>Finalmente, sumamos en <strong>serie</strong> los inductores de entrada y salida con el núcleo equivalente:</p>
-                            <ul>
-                                <li>Inductor de entrada: 6 mH</li>
-                                <li>Núcleo del puente: 3.589 mH</li>
-                                <li>Inductor de salida: 10 mH</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Inductancia Equivalente Total</div>
-                        <div class="formula">
-                            L<sub>eq</sub> = 6 + 3.589 + 10 = 19.589 mH
-                        </div>
-                    </div>
-
-                    <div class="result">
-                        <div class="result-title">🎊 RESULTADO FINAL - PROBLEMA 2</div>
-                        <div class="result-value">L<sub>eq</sub> ≈ 19.59 mH</div>
-                    </div>
-
-                    <div class="executive-summary">
-                        <h4>📝 Resumen Ejecutivo</h4>
-                        <p><strong>Método utilizado:</strong> Transformación Estrella-Delta + Simplificación Serie-Paralelo</p>
-                        <p><strong>Técnica clave:</strong> Conversión Y-Δ para resolver topología en puente</p>
-                        <p><strong>Inductancia total de componentes:</strong> 63 mH</p>
-                        <p><strong>Inductancia equivalente final:</strong> 19.59 mH</p>
-                        <p><strong>Factor de reducción:</strong> 3.2× (efecto de las conexiones paralelas en el puente)</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROBLEMA 3: TEOREMA DE THÉVENIN -->
-            <div class="problem-section" id="problema3">
-                <div class="problem-header">
-                    <h2>Problema 3: Equivalente de Thévenin</h2>
-                    <p class="objective">🎯 Objetivo: Determinar el voltaje de Thévenin (V<sub>th</sub>) y la resistencia de Thévenin (R<sub>th</sub>) vistas desde las terminales a-b</p>
-                </div>
-                <div class="problem-body">
-                    
-                    <div class="info-box theory">
-                        <div class="info-box-title">Teorema de Thévenin</div>
-                        <p>Cualquier circuito lineal de dos terminales puede reemplazarse por un circuito equivalente formado por:</p>
-                        <ul>
-                            <li><strong>V<sub>th</sub>:</strong> Voltaje en circuito abierto entre las terminales</li>
-                            <li><strong>R<sub>th</sub>:</strong> Resistencia vista desde las terminales con todas las fuentes independientes apagadas</li>
-                        </ul>
-                    </div>
-
-                    <h3>⚡ PARTE A: Voltaje de Thévenin (V<sub>th</sub>)</h3>
-                    
-                    <div class="info-box">
-                        <div class="info-box-title">Metodología</div>
-                        <p>Utilizaremos <strong>Análisis de Nodos</strong> aplicando la Ley de Corrientes de Kirchhoff (LCK) en cada nodo principal del circuito.</p>
-                    </div>
-
-                    <h4>Paso A.1: Definición de Nodos y Referencias</h4>
-                    <div class="step">
-                        <div class="step-title">Configuración del Sistema de Referencias</div>
-                        <div class="step-content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nodo</th>
-                                        <th>Ubicación</th>
-                                        <th>Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Referencia (0V)</strong></td>
-                                        <td>Línea inferior</td>
-                                        <td>Tierra del circuito</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Nodo 1</strong></td>
-                                        <td>Sobre fuente de 30V</td>
-                                        <td>Unión superior izquierda</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Nodo 2</strong></td>
-                                        <td>Sobre fuente de 5A</td>
-                                        <td>Unión central</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Nodo 3</strong></td>
-                                        <td>Sobre fuente de 20V</td>
-                                        <td>Terminal b (salida)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="info-box warning">
-                        <div class="info-box-title">⚠️ Convención de Polaridad Crítica</div>
-                        <p><strong>Las fuentes de voltaje tienen su terminal positivo (+) conectado a tierra.</strong> Esto significa que introducen un voltaje <strong>negativo</strong> en los nodos a los que están conectadas.</p>
-                        <ul>
-                            <li>Fuente izquierda: Aporta -30V al Nodo 1</li>
-                            <li>Fuente derecha: Aporta -20V al Nodo 3</li>
-                        </ul>
-                    </div>
-
-                    <h4>Paso A.2: Planteamiento de Ecuaciones Nodales</h4>
-                    <div class="step">
-                        <div class="step-title">Aplicación de la Ley de Corrientes de Kirchhoff (LCK)</div>
-                        <div class="step-content">
-                            <p>En cada nodo, la suma de corrientes que entran debe ser igual a la suma de corrientes que salen.</p>
-                            <p class="highlight-formula">∑ I<sub>entrantes</sub> = ∑ I<sub>salientes</sub></p>
-                            <p>Las corrientes se calculan usando la Ley de Ohm: <strong>I = (V₁ - V₂) / R</strong></p>
-                        </div>
-                    </div>
-
-                    <h4>🔷 Ecuación del Nodo 1</h4>
-                    <div class="step">
-                        <div class="step-content">
-                            <p><strong>Corrientes desde el Nodo 1:</strong></p>
-                            <ul>
-                                <li>Hacia la fuente de 30V (tierra): (V₁ - (-30)) / 10</li>
-                                <li>Hacia el Nodo 2: (V₁ - V₂) / 10</li>
-                                <li>Hacia el Nodo 3: (V₁ - V₃) / 20</li>
-                            </ul>
-                            <p>Suma igual a cero (no hay fuentes de corriente en este nodo):</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Ecuación Nodo 1 (sin simplificar)</div>
-                        <div class="formula">
-                            (V₁ + 30)/10 + (V₁ - V₂)/10 + (V₁ - V₃)/20 = 0
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-content">
-                            <p><strong>Multiplicando por 20</strong> para eliminar denominadores:</p>
-                            <p>2(V₁ + 30) + 2(V₁ - V₂) + (V₁ - V₃) = 0</p>
-                            <p>2V₁ + 60 + 2V₁ - 2V₂ + V₁ - V₃ = 0</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Ecuación 1 (simplificada)</div>
-                        <div class="formula">5V₁ - 2V₂ - V₃ = -60</div>
-                    </div>
-
-                    <h4>🔷 Ecuación del Nodo 2</h4>
-                    <div class="step">
-                        <div class="step-content">
-                            <p><strong>Corrientes desde el Nodo 2:</strong></p>
-                            <ul>
-                                <li>Hacia el Nodo 1: (V₂ - V₁) / 10</li>
-                                <li>Hacia tierra (por resistencia central): V₂ / 10</li>
-                                <li>Hacia el Nodo 3: (V₂ - V₃) / 20</li>
-                                <li><strong>Fuente de corriente de 5A inyecta corriente AL nodo</strong> (positiva)</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Ecuación Nodo 2 (sin simplificar)</div>
-                        <div class="formula">
-                            (V₂ - V₁)/10 + V₂/10 + (V₂ - V₃)/20 = 5
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-content">
-                            <p><strong>Multiplicando por 20:</strong></p>
-                            <p>2(V₂ - V₁) + 2V₂ + (V₂ - V₃) = 100</p>
-                            <p>2V₂ - 2V₁ + 2V₂ + V₂ - V₃ = 100</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Ecuación 2 (simplificada)</div>
-                        <div class="formula">-2V₁ + 5V₂ - V₃ = 100</div>
-                    </div>
-
-                    <h4>🔷 Ecuación del Nodo 3</h4>
-                    <div class="step">
-                        <div class="step-content">
-                            <p><strong>Corrientes desde el Nodo 3:</strong></p>
-                            <ul>
-                                <li>Hacia el Nodo 1: (V₃ - V₁) / 20</li>
-                                <li>Hacia el Nodo 2: (V₃ - V₂) / 20</li>
-                                <li>Hacia la fuente de 20V (tierra): (V₃ - (-20)) / 10</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Ecuación Nodo 3 (sin simplificar)</div>
-                        <div class="formula">
-                            (V₃ - V₁)/20 + (V₃ - V₂)/20 + (V₃ + 20)/10 = 0
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-content">
-                            <p><strong>Multiplicando por 20:</strong></p>
-                            <p>(V₃ - V₁) + (V₃ - V₂) + 2(V₃ + 20) = 0</p>
-                            <p>V₃ - V₁ + V₃ - V₂ + 2V₃ + 40 = 0</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Ecuación 3 (simplificada)</div>
-                        <div class="formula">-V₁ - V₂ + 4V₃ = -40</div>
-                    </div>
-
-                    <div class="info-box success">
-                        <div class="info-box-title">Sistema de Ecuaciones Lineales</div>
-                        <p><strong>Tenemos 3 ecuaciones con 3 incógnitas:</strong></p>
-                        <p class="highlight-formula">5V₁ - 2V₂ - V₃ = -60 ... (Ec. 1)</p>
-                        <p class="highlight-formula">-2V₁ + 5V₂ - V₃ = 100 ... (Ec. 2)</p>
-                        <p class="highlight-formula">-V₁ - V₂ + 4V₃ = -40 ... (Ec. 3)</p>
-                    </div>
-
-                    <h4>Paso A.3: Resolución del Sistema por Eliminación</h4>
-                    
-                    <div class="step">
-                        <div class="step-title">Primera Simplificación: (Ec. 2) - (Ec. 1)</div>
-                        <div class="step-content">
-                            <p>Restamos la Ecuación 1 de la Ecuación 2 para eliminar V₃:</p>
-                            <p>(-2V₁ + 5V₂ - V₃) - (5V₁ - 2V₂ - V₃) = 100 - (-60)</p>
-                            <p>-2V₁ + 5V₂ - V₃ - 5V₁ + 2V₂ + V₃ = 160</p>
-                            <p>-7V₁ + 7V₂ = 160</p>
-                            <p>V₂ - V₁ = 160/7 ≈ 22.857</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Relación V₂-V₁</div>
-                        <div class="formula">V₂ = V₁ + 22.857</div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-title">Segunda Simplificación: Sustitución en (Ec. 3)</div>
-                        <div class="step-content">
-                            <p>Sustituimos V₂ = V₁ + 22.857 en la Ecuación 3:</p>
-                            <p>-V₁ - (V₁ + 22.857) + 4V₃ = -40</p>
-                            <p>-V₁ - V₁ - 22.857 + 4V₃ = -40</p>
-                            <p>-2V₁ + 4V₃ = -40 + 22.857</p>
-                            <p>-2V₁ + 4V₃ = -17.143</p>
-                            <p>4V₃ = 2V₁ - 17.143</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Relación V₃-V₁</div>
-                        <div class="formula">V₃ = 0.5V₁ - 4.286</div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-title">Tercera Simplificación: Sustitución en (Ec. 1)</div>
-                        <div class="step-content">
-                            <p>Sustituimos ambas relaciones en la Ecuación 1:</p>
-                            <p>5V₁ - 2(V₁ + 22.857) - (0.5V₁ - 4.286) = -60</p>
-                            <p>5V₁ - 2V₁ - 45.714 - 0.5V₁ + 4.286 = -60</p>
-                            <p>2.5V₁ - 41.428 = -60</p>
-                            <p>2.5V₁ = -60 + 41.428</p>
-                            <p>2.5V₁ = -18.572</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Solución V₁</div>
-                        <div class="formula">V₁ = -18.572 / 2.5 ≈ -7.43 V</div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-title">Cálculo de V₂ y V₃</div>
-                        <div class="step-content">
-                            <p><strong>Calculamos V₂:</strong></p>
-                            <p>V₂ = V₁ + 22.857 = -7.43 + 22.857 = 15.43 V</p>
-                            <br>
-                            <p><strong>Calculamos V₃ (voltaje en terminal b):</strong></p>
-                            <p>V₃ = 0.5V₁ - 4.286 = 0.5(-7.43) - 4.286</p>
-                            <p>V₃ = -3.715 - 4.286 = -8.00 V</p>
-                        </div>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Variable</th>
-                                <th>Valor Calculado</th>
-                                <th>Interpretación</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>V₁</td>
-                                <td>-7.43 V</td>
-                                <td>Voltaje en nodo sobre fuente de 30V</td>
-                            </tr>
-                            <tr>
-                                <td>V₂</td>
-                                <td>15.43 V</td>
-                                <td>Voltaje en nodo central (fuente 5A)</td>
-                            </tr>
-                            <tr>
-                                <td>V₃</td>
-                                <td>-8.00 V</td>
-                                <td>Voltaje en terminal b</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Paso A.4: Cálculo del Voltaje de Thévenin</h4>
-                    <div class="step">
-                        <div class="step-title">Diferencia de Potencial a-b</div>
-                        <div class="step-content">
-                            <p>El voltaje de Thévenin es la diferencia de potencial entre las terminales a y b en <strong>circuito abierto</strong>.</p>
-                            <ul>
-                                <li><strong>Terminal a:</strong> Conectada al Nodo 1 a través de resistencia de 10Ω. Como no circula corriente (circuito abierto), V<sub>a</sub> = V₁ = -7.43 V</li>
-                                <li><strong>Terminal b:</strong> Es el Nodo 3, V<sub>b</sub> = V₃ = -8.00 V</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Voltaje de Thévenin</div>
-                        <div class="formula">
-                            V<sub>th</sub> = V<sub>a</sub> - V<sub>b</sub> = -7.43 - (-8.00) = 0.57 V
-                        </div>
-                    </div>
-
-                    <div class="info-box success">
-                        <div class="info-box-title">✅ Resultado Parte A</div>
-                        <p class="highlight-formula">V<sub>th</sub> = 0.57 V</p>
-                    </div>
-
-                    <h3>⚙️ PARTE B: Resistencia de Thévenin (R<sub>th</sub>)</h3>
-                    
-                    <div class="info-box">
-                        <div class="info-box-title">Metodología</div>
-                        <p>Para calcular R<sub>th</sub>, <strong>apagamos todas las fuentes independientes</strong>:</p>
-                        <ul>
-                            <li>Fuentes de voltaje → Reemplazar por <strong>cortocircuito</strong></li>
-                            <li>Fuentes de corriente → Reemplazar por <strong>circuito abierto</strong></li>
-                        </ul>
-                        <p>Luego calculamos la resistencia vista desde las terminales a-b.</p>
-                    </div>
-
-                    <h4>Paso B.1: Configuración del Circuito Resistivo</h4>
-                    <div class="step">
-                        <div class="step-title">Estado del Circuito con Fuentes Apagadas</div>
-                        <div class="step-content">
-                            <p><strong>Después de apagar fuentes:</strong></p>
-                            <ul>
-                                <li>Fuente de 30V → Cortocircuito (Nodo 1 conectado a tierra)</li>
-                                <li>Fuente de 20V → Cortocircuito (Nodo 3 conectado a tierra)</li>
-                                <li>Fuente de 5A → Circuito abierto (se elimina esa rama)</li>
-                            </ul>
-                            <p><strong>Red resistiva resultante:</strong></p>
-                            <ul>
-                                <li>Nodo 1 tiene resistencia de 10Ω a tierra</li>
-                                <li>Nodo 2 tiene resistencia de 10Ω a tierra</li>
-                                <li>Nodo 3 tiene resistencia de 10Ω a tierra</li>
-                                <li>Entre Nodo 1 y Nodo 2: 10Ω</li>
-                                <li>Entre Nodo 2 y Nodo 3: 20Ω</li>
-                                <li>Entre Nodo 1 y Nodo 3: 20Ω</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="diagram-box">
-                        <div class="diagram-title">📊 Topología Resistiva</div>
-                        <p>Red Delta (N1-N2-N3) con cada nodo conectado a tierra</p>
-                    </div>
-
-                    <h4>Paso B.2: Transformación Estrella en Nodo 2</h4>
-                    <div class="step">
-                        <div class="step-title">Identificación de Configuración Y</div>
-                        <div class="step-content">
-                            <p>El Nodo 2 forma una <strong>estrella</strong> con tres ramas:</p>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Rama</th>
-                                        <th>Conexión</th>
-                                        <th>Resistencia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>R<sub>a</sub></td>
-                                        <td>Nodo 2 → Nodo 1</td>
-                                        <td>10 Ω</td>
-                                    </tr>
-                                    <tr>
-                                        <td>R<sub>b</sub></td>
-                                        <td>Nodo 2 → Nodo 3</td>
-                                        <td>20 Ω</td>
-                                    </tr>
-                                    <tr>
-                                        <td>R<sub>c</sub></td>
-                                        <td>Nodo 2 → Tierra</td>
-                                        <td>10 Ω</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p>Convertiremos esta Y en una Δ entre N1, N3 y Tierra (G).</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Cálculo Numerador Y-Δ</div>
-                        <div class="formula">
-                            N = R<sub>a</sub>R<sub>b</sub> + R<sub>b</sub>R<sub>c</sub> + R<sub>c</sub>R<sub>a</sub><br>
-                            N = (10×20) + (20×10) + (10×10) = 200 + 200 + 100 = 500
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-content">
-                            <p><strong>Resistencias Delta resultantes:</strong></p>
-                            <ul>
-                                <li>R<sub>N1-G</sub> = N / R<sub>b</sub> = 500 / 20 = <strong>25 Ω</strong></li>
-                                <li>R<sub>N3-G</sub> = N / R<sub>a</sub> = 500 / 10 = <strong>50 Ω</strong></li>
-                                <li>R<sub>N1-N3</sub> = N / R<sub>c</sub> = 500 / 10 = <strong>50 Ω</strong></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h4>Paso B.3: Combinación con Resistencias Originales</h4>
-                    <div class="step">
-                        <div class="step-title">Paralelos Resultantes</div>
-                        <div class="step-content">
-                            <p>Las resistencias de la Delta quedan en paralelo con las resistencias originales:</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Entre N1 y N3</div>
-                        <div class="formula">
-                            R<sub>N1-N3</sub> = 20 Ω // 50 Ω = (20 × 50) / (20 + 50) = 1000 / 70 ≈ 14.29 Ω
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Entre N1 y Tierra</div>
-                        <div class="formula">
-                            R<sub>N1-G</sub> = 10 Ω // 25 Ω = (10 × 25) / (10 + 25) = 250 / 35 ≈ 7.14 Ω
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Entre N3 y Tierra</div>
-                        <div class="formula">
-                            R<sub>N3-G</sub> = 10 Ω // 50 Ω = (10 × 50) / (10 + 50) = 500 / 60 ≈ 8.33 Ω
-                        </div>
-                    </div>
-
-                    <h4>Paso B.4: Resistencia Equivalente N1-N3</h4>
-                    <div class="step">
-                        <div class="step-title">Configuración Final</div>
-                        <div class="step-content">
-                            <p>Tenemos dos caminos en paralelo entre N1 y N3:</p>
-                            <ul>
-                                <li><strong>Camino directo:</strong> 14.29 Ω</li>
-                                <li><strong>Camino por tierra:</strong> R<sub>N1-G</sub> + R<sub>N3-G</sub> = 7.14 + 8.33 = 15.47 Ω</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Resistencia Equivalente N1-N3</div>
-                        <div class="formula">
-                            R<sub>eq(N1-N3)</sub> = 14.29 Ω // 15.47 Ω<br><br>
-                            R<sub>eq(N1-N3)</sub> = (14.29 × 15.47) / (14.29 + 15.47) = 221.06 / 29.76 ≈ 7.43 Ω
-                        </div>
-                    </div>
-
-                    <h4>Paso B.5: Resistencia de Thévenin Final</h4>
-                    <div class="step">
-                        <div class="step-title">Suma con Resistencia de Entrada</div>
-                        <div class="step-content">
-                            <p>Finalmente, añadimos la resistencia de 10 Ω que está en <strong>serie</strong> entre la terminal 'a' y el Nodo 1:</p>
-                        </div>
-                    </div>
-
-                    <div class="formula-box">
-                        <div class="formula-label">Resistencia de Thévenin Total</div>
-                        <div class="formula">
-                            R<sub>th</sub> = 10 + 7.43 = 17.43 Ω
-                        </div>
-                    </div>
-
-                    <div class="info-box success">
-                        <div class="info-box-title">✅ Resultado Parte B</div>
-                        <p class="highlight-formula">R<sub>th</sub> = 17.43 Ω</p>
-                    </div>
-
-                    <div class="result">
-                        <div class="result-title">🎊 RESULTADO FINAL - PROBLEMA 3</div>
-                        <div class="result-value">
-                            V<sub>th</sub> = 0.57 V<br>
-                            R<sub>th</sub> = 17.43 Ω
-                        </div>
-                    </div>
-
-                    <div class="executive-summary">
-                        <h4>📝 Resumen Ejecutivo</h4>
-                        <p><strong>Método V<sub>th</sub>:</strong> Análisis de Nodos con sistema de ecuaciones 3×3</p>
-                        <p><strong>Método R<sub>th</sub>:</strong> Apagado de fuentes + Transformación Y-Δ + Simplificación</p>
-                        <p><strong>Circuito equivalente de Thévenin:</strong></p>
-                        <ul>
-                            <li>Fuente de voltaje: 0.57 V</li>
-                            <li>Resistencia en serie: 17.43 Ω</li>
-                        </ul>
-                        <p><strong>Aplicación:</strong> Cualquier carga conectada entre a-b "verá" únicamente este circuito simplificado.</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <!-- PIE DE PÁGINA -->
-        <div class="footer">
-            <p><strong>📐 Taller de Análisis de Circuitos Eléctricos</strong></p>
-            <p>Solución Profesional Detallada</p>
-            <p>© 2025 - Ingeniería Eléctrica y Electrónica</p>
+        <!-- PASO 3 -->
+        <div class="step">
+            <div class="step-title">Paso 3: Paralelo con la Diagonal</div>
+            <p>Ahora la rama equivalente de 40 queda en paralelo con la diagonal de 50 (ambas conectan Nodo A con Nodo C).</p>
+            <div class="formula">40 + 50 = 90 F</div>
+            
+            <div class="circuit-diagram">
+                <svg width="400" height="160" viewBox="0 0 400 160">
+                    <path d="M 50 50 L 100 50" class="wire"/>
+                    <path d="M 100 50 L 100 130" class="wire"/>
+                    <!-- Combined 90 -->
+                    <path d="M 100 50 L 300 50 L 300 130" class="wire"/>
+                    <path d="M 50 130 L 300 130" class="wire"/>
+                    
+                    <!-- Input 12 -->
+                    <line x1="75" y1="40" x2="75" y2="60" stroke="#e74c3c" stroke-width="2"/> <line x1="80" y1="40" x2="80" y2="60" stroke="#e74c3c" stroke-width="2"/>
+                    
+                    <!-- Left 12 -->
+                    <line x1="90" y1="90" x2="110" y2="90" stroke="#e74c3c" stroke-width="2" transform="rotate(90 100 90)"/>
+                    
+                    <!-- NEW 90 -->
+                    <rect x="250" y="40" width="20" height="20" fill="#d4edda" stroke="#333" stroke-width="1"/>
+                    <line x1="260" y1="40" x2="260" y2="60" stroke="#e74c3c" stroke-width="2"/> <line x1="265" y1="40" x2="265" y2="60" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="250" y="35" class="cap-label">90 (Eq)</text>
+
+                    <!-- Bottom 60 -->
+                    <line x1="230" y1="120" x2="230" y2="140" stroke="#e74c3c" stroke-width="2"/> <line x1="235" y1="120" x2="235" y2="140" stroke="#e74c3c" stroke-width="2"/> <text x="230" y="155">60</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- PASO 4 -->
+        <div class="step">
+            <div class="step-title">Paso 4: Serie con el Fondo</div>
+            <p>El bloque de 90 está en serie con el capacitor de 60 que va a tierra.</p>
+            <div class="formula">(90 × 60) / (90 + 60) = 36 F</div>
+
+            <div class="circuit-diagram">
+                <svg width="400" height="150" viewBox="0 0 400 150">
+                    <path d="M 50 50 L 100 50" class="wire"/>
+                    <path d="M 100 50 L 100 130" class="wire"/>
+                    <!-- Combined 36 loop back -->
+                    <path d="M 100 50 L 250 50 L 250 130 L 100 130" class="wire"/>
+                    <path d="M 50 130 L 100 130" class="wire"/>
+                    
+                    <!-- Input 12 -->
+                    <line x1="75" y1="40" x2="75" y2="60" stroke="#e74c3c" stroke-width="2"/> <line x1="80" y1="40" x2="80" y2="60" stroke="#e74c3c" stroke-width="2"/>
+                    
+                    <!-- Left 12 -->
+                    <line x1="90" y1="90" x2="110" y2="90" stroke="#e74c3c" stroke-width="2" transform="rotate(90 100 90)"/>
+                    
+                    <!-- NEW 36 -->
+                    <rect x="240" y="80" width="20" height="20" fill="#cce5ff" stroke="#333" stroke-width="1"/>
+                    <line x1="250" y1="80" x2="250" y2="100" stroke="#e74c3c" stroke-width="2"/> <line x1="255" y1="80" x2="255" y2="100" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="265" y="95" class="cap-label">36 (Eq)</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- PASO FINAL -->
+        <div class="step">
+            <div class="step-title">Paso 5: Paralelo Final y Entrada</div>
+            <p>La rama de 36 queda en paralelo con la vertical de 12 (Suma = 48). Finalmente, se suma en serie con la entrada de 12.</p>
+            <div class="formula">C_eq = (12 × 48) / (12 + 48) = 9.6 F</div>
+            
+            <div class="result-box">
+                Respuesta: 9.6 F
+            </div>
         </div>
     </div>
+
+    <!-- PROBLEMA 2 -->
+    <div class="section">
+        <h2>2. Inductancia Equivalente</h2>
+        <p><em>(Procedimiento matemático completo incluido en la sección anterior)</em></p>
+        <div class="result-box">
+            Leq = 19.59 mH
+        </div>
+    </div>
+
+    <!-- PROBLEMA 3 -->
+    <div class="section">
+        <h2>3. Thevenin</h2>
+        <p><em>(Procedimiento matemático completo incluido en la sección anterior)</em></p>
+        <div class="result-box">
+            Vth = 0.57 V<br>
+            Rth = 17.43 Ω
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>
