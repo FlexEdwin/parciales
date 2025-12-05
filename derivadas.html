@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Detallada: Evaluando Derivadas</title>
+    <title>Guía Detallada: Evaluando Derivadas by flex</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -19,6 +19,14 @@
             color: var(--text-color);
             background-color: var(--bg-color);
             margin: 0;
+            padding: 0; /* Quitamos padding del body para que el footer toque el fondo si es necesario */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1; /* Esto asegura que el footer se quede abajo si hay poco contenido */
             padding: 20px;
         }
 
@@ -135,6 +143,35 @@
             background-color: #f2f2f2;
         }
 
+        /* Estilos del Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .footer-highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .filter-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 3px 10px;
+            border-radius: 15px;
+            border: 1px solid var(--accent-color);
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .container {
@@ -150,323 +187,331 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>Guía Detallada: Cómo Evaluar la Derivada de una Función en un Punto Específico</h1>
+<div class="main-content">
+    <div class="container">
+        <h1>Guía Detallada: Cómo Evaluar la Derivada de una Función en un Punto Específico</h1>
 
-    <div class="intro-box">
-        <h2>Introducción: ¡Tu Primer Paso para Dominar las Derivadas!</h2>
-        <p>¡Bienvenido al fascinante mundo del cálculo! Si alguna vez te has preguntado qué significa "la derivada en un punto", estás en el lugar correcto. Este concepto nos dice la inclinación exacta o la tasa de cambio instantánea de una función en un momento preciso.</p>
-        <p>En esta guía, te mostraremos un proceso claro y directo de dos pasos para encontrar este valor. El método es simple:</p>
-        <ol class="step-list">
-            <li><strong>Derivar:</strong> Primero, aplicamos las reglas de derivación para encontrar la función derivada, conocida como <span class="math-expr">f'(x)</span>. Esta nueva función es una fórmula general para la pendiente en cualquier punto de la función original.</li>
-            <li><strong>Evaluar:</strong> Segundo, sustituimos el valor específico de <strong>x</strong> (o la variable que corresponda) en la función derivada que acabamos de encontrar. El resultado es un número que representa la pendiente de la línea tangente en ese punto exacto.</li>
-        </ol>
-        <p>Sigue estos ejemplos paso a paso para construir una base sólida y verás cómo este proceso se vuelve intuitivo y poderoso.</p>
+        <div class="intro-box">
+            <h2>Introducción: ¡Tu Primer Paso para Dominar las Derivadas!</h2>
+            <p>¡Bienvenido al fascinante mundo del cálculo! Si alguna vez te has preguntado qué significa "la derivada en un punto", estás en el lugar correcto. Este concepto nos dice la inclinación exacta o la tasa de cambio instantánea de una función en un momento preciso.</p>
+            <p>En esta guía, te mostraremos un proceso claro y directo de dos pasos para encontrar este valor. El método es simple:</p>
+            <ol class="step-list">
+                <li><strong>Derivar:</strong> Primero, aplicamos las reglas de derivación para encontrar la función derivada, conocida como <span class="math-expr">f'(x)</span>. Esta nueva función es una fórmula general para la pendiente en cualquier punto de la función original.</li>
+                <li><strong>Evaluar:</strong> Segundo, sustituimos el valor específico de <strong>x</strong> (o la variable que corresponda) en la función derivada que acabamos de encontrar. El resultado es un número que representa la pendiente de la línea tangente en ese punto exacto.</li>
+            </ol>
+            <p>Sigue estos ejemplos paso a paso para construir una base sólida y verás cómo este proceso se vuelve intuitivo y poderoso.</p>
+        </div>
+
+        <!-- Ejemplo 1 -->
+        <div class="example-block">
+            <h3>1. Ejemplo 1: f'(2) para f(x) = √(x² - 3)</h3>
+            <ul class="details-list">
+                <li>
+                    <strong class="label">1.1. La Misión:</strong>
+                    <ul>
+                        <li>Nuestra función es: <span class="math-expr">f(x) = √(x² - 3)</span></li>
+                        <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = 2</span>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">1.2. Paso 1: Encontrando la Derivada (f'(x))</strong>
+                    <p>Esta función es una composición: la función <span class="math-expr">x² - 3</span> está "dentro" de una función de raíz cuadrada. Por lo tanto, debemos usar la <strong>Regla de la Cadena</strong>. Un buen truco para recordarlo es: <em>Derivada de lo de afuera, por la derivada de lo de adentro.</em></p>
+                    <ol>
+                        <li>Reescribimos la raíz como un exponente: <span class="math-expr">f(x) = (x² - 3)<sup>1/2</sup></span></li>
+                        <li>Aplicamos la Regla de la Cadena:
+                            <ul>
+                                <li>Derivada de lo de afuera: <span class="math-expr">(1/2)(x² - 3)<sup>-1/2</sup></span></li>
+                                <li>Derivada de lo de adentro: <span class="math-expr">2x</span></li>
+                            </ul>
+                        </li>
+                        <li>Multiplicamos ambos resultados: <span class="math-expr">f'(x) = (1/2)(x² - 3)<sup>-1/2</sup> * (2x)</span></li>
+                        <li>Simplificamos la expresión: <span class="math-expr">f'(x) = x / √(x² - 3)</span></li>
+                    </ol>
+                </li>
+                <li>
+                    <strong class="label">1.3. Paso 2: Evaluando en el Punto (f'(2))</strong>
+                    <p>Ahora, tomamos la derivada f'(x) y sustituimos cada x con el valor 2.</p>
+                    <ul>
+                        <li><span class="math-expr">f'(2) = 2 / √(2² - 3)</span></li>
+                        <li><span class="math-expr">f'(2) = 2 / √(4 - 3)</span></li>
+                        <li><span class="math-expr">f'(2) = 2 / √1</span></li>
+                        <li><span class="math-expr">f'(2) = 2 / 1 = 2</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">1.4. Síntesis y Significado:</strong>
+                    <p>El resultado final es <span class="math-expr">f'(2) = 2</span>. Esto nos dice que la pendiente de la línea tangente a la gráfica de f(x) justo en el punto x=2 es 2. Una pendiente de 2 indica una subida pronunciada y positiva.</p>
+                </li>
+            </ul>
+            <div class="transition-note">Transición: ¡Excelente trabajo! Con la Regla de la Cadena dominada, apliquemos una regla diferente en el siguiente desafío.</div>
+        </div>
+
+        <!-- Ejemplo 2 -->
+        <div class="example-block">
+            <h3>2. Ejemplo 2: z'(-1) para z(x) = (x + 1) / (2x - 3)</h3>
+            <ul class="details-list">
+                <li>
+                    <strong class="label">2.1. La Misión:</strong>
+                    <ul>
+                        <li>Nuestra función es: <span class="math-expr">z(x) = (x + 1) / (2x - 3)</span></li>
+                        <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = -1</span>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">2.2. Paso 1: Encontrando la Derivada (z'(x))</strong>
+                    <p>Dado que tenemos una división de dos funciones, debemos usar la <strong>Regla del Cociente</strong>.</p>
+                    <ol>
+                        <li>Identificamos u y v:
+                            <ul>
+                                <li><span class="math-expr">u = x + 1</span> => <span class="math-expr">u' = 1</span></li>
+                                <li><span class="math-expr">v = 2x - 3</span> => <span class="math-expr">v' = 2</span></li>
+                            </ul>
+                        </li>
+                        <li>Aplicamos la fórmula: <span class="math-expr">z'(x) = [ (1)(2x - 3) - (x + 1)(2) ] / (2x - 3)²</span></li>
+                        <li>Simplificamos el numerador paso a paso:
+                            <br><span class="math-expr">z'(x) = [ 2x - 3 - 2x - 2 ] / (2x - 3)²</span>
+                            <br><span class="math-expr">z'(x) = -5 / (2x - 3)²</span>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <strong class="label">2.3. Paso 2: Evaluando en el Punto (z'(-1))</strong>
+                    <p>Sustituimos cada x con el valor -1 en nuestra derivada z'(x).</p>
+                    <ul>
+                        <li><span class="math-expr">z'(-1) = -5 / (2(-1) - 3)²</span></li>
+                        <li><span class="math-expr">z'(-1) = -5 / (-2 - 3)²</span></li>
+                        <li><span class="math-expr">z'(-1) = -5 / (-5)²</span></li>
+                        <li><span class="math-expr">z'(-1) = -5 / 25 = -1/5</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">2.4. Síntesis y Significado:</strong>
+                    <p>El resultado final es <span class="math-expr">z'(-1) = -1/5</span>. La pendiente de la línea tangente a la gráfica de z(x) en el punto x=-1 es -1/5. Una pendiente fraccionaria pequeña como -1/5 nos indica una inclinación descendente muy suave en ese punto.</p>
+                </li>
+            </ul>
+            <div class="transition-note">Transición: Perfecto. Ahora que hemos manejado las fracciones con la Regla del Cociente, pasemos a un ejemplo con exponentes negativos.</div>
+        </div>
+
+        <!-- Ejemplo 3 -->
+        <div class="example-block">
+            <h3>3. Ejemplo 3: g'(-1) para g(x) = 2x⁻³ + 4x⁻¹</h3>
+            <ul class="details-list">
+                <li>
+                    <strong class="label">3.1. La Misión:</strong>
+                    <ul>
+                        <li>Nuestra función es: <span class="math-expr">g(x) = 2x⁻³ + 4x⁻¹</span></li>
+                        <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = -1</span>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">3.2. Paso 1: Encontrando la Derivada (g'(x))</strong>
+                    <p>Esta función es una suma de términos. Podemos derivar cada uno por separado usando la <strong>Regla de la Potencia</strong>.</p>
+                    <ol>
+                        <li>Derivamos el primer término (2x⁻³): <span class="math-expr">(-3) * 2x<sup>(-3 - 1)</sup> = -6x⁻⁴</span></li>
+                        <li>Derivamos el segundo término (4x⁻¹): <span class="math-expr">(-1) * 4x<sup>(-1 - 1)</sup> = -4x⁻²</span></li>
+                        <li>Unimos los resultados: <span class="math-expr">g'(x) = -6x⁻⁴ - 4x⁻²</span></li>
+                    </ol>
+                </li>
+                <li>
+                    <strong class="label">3.3. Paso 2: Evaluando en el Punto (g'(-1))</strong>
+                    <p>Sustituimos x con -1. Ten cuidado con los signos al elevar un número negativo a una potencia.</p>
+                    <ul>
+                        <li><span class="math-expr">g'(-1) = -6(-1)⁻⁴ - 4(-1)⁻²</span></li>
+                        <li>Recuerda: (-1) elevado a una potencia par es 1.</li>
+                        <li><span class="math-expr">g'(-1) = -6(1) - 4(1)</span></li>
+                        <li><span class="math-expr">g'(-1) = -6 - 4 = -10</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">3.4. Síntesis y Significado:</strong>
+                    <p>El resultado es <span class="math-expr">g'(-1) = -10</span>. La pendiente de la línea tangente a g(x) en el punto x=-1 es -10, lo que indica una inclinación negativa muy pronunciada.</p>
+                </li>
+            </ul>
+            <div class="transition-note">Transición: ¡Excelente! Has demostrado que los exponentes negativos no tienen secretos para ti. Ahora, preparémonos para los exponentes fraccionarios.</div>
+        </div>
+
+        <!-- Ejemplo 4 -->
+        <div class="example-block">
+            <h3>4. Ejemplo 4: m'(1) para m(t) = 2 / ⁵√t</h3>
+            <ul class="details-list">
+                <li>
+                    <strong class="label">4.1. La Misión:</strong>
+                    <ul>
+                        <li>Nuestra función es: <span class="math-expr">m(t) = 2 / ⁵√t</span></li>
+                        <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">t = 1</span>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">4.2. Paso 1: Encontrando la Derivada (m'(t))</strong>
+                    <p>El paso más importante aquí es reescribir la función para poder usar la Regla de la Potencia. Las raíces en el denominador se convierten en exponentes fraccionarios negativos.</p>
+                    <ol>
+                        <li>Reescribimos la función: <span class="math-expr">m(t) = 2 / t<sup>1/5</sup> = 2t<sup>-1/5</sup></span></li>
+                        <li>Ahora aplicamos la Regla de la Potencia: <span class="math-expr">m'(t) = (-1/5) * 2t<sup>(-1/5 - 1)</sup></span></li>
+                        <li>Simplificamos el exponente: <span class="math-expr">m'(t) = (-2/5)t<sup>-6/5</sup></span></li>
+                    </ol>
+                </li>
+                <li>
+                    <strong class="label">4.3. Paso 2: Evaluando en el Punto (m'(1))</strong>
+                    <p>Sustituimos t con 1. Evaluar en t=1 es muy conveniente.</p>
+                    <ul>
+                        <li><span class="math-expr">m'(1) = (-2/5)(1)<sup>-6/5</sup></span></li>
+                        <li><span class="math-expr">m'(1) = (-2/5)(1)</span></li>
+                        <li><span class="math-expr">m'(1) = -2/5</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">4.4. Síntesis y Significado:</strong>
+                    <p>El resultado final es <span class="math-expr">m'(1) = -2/5</span>. Esta es la pendiente de la línea tangente a la gráfica de m(t) en t=1, lo que representa una inclinación descendente suave.</p>
+                </li>
+            </ul>
+            <div class="transition-note">Transición: Como ves, a veces el paso más importante es reescribir la función. Volvamos a la Regla de la Cadena con un último ejemplo combinado.</div>
+        </div>
+
+        <!-- Ejemplo 5 -->
+        <div class="example-block">
+            <h3>5. Ejemplo 5: h'(2) para h(x) = -3√(2x² + 4x)</h3>
+            <ul class="details-list">
+                <li>
+                    <strong class="label">5.1. La Misión:</strong>
+                    <ul>
+                        <li>Nuestra función es: <span class="math-expr">h(x) = -3√(2x² + 4x)</span></li>
+                        <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = 2</span>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">5.2. Paso 1: Encontrando la Derivada (h'(x))</strong>
+                    <p>Este es otro caso para la Regla de la Cadena. El -3 al frente es un múltiplo constante.</p>
+                    <ol>
+                        <li>Reescribimos la función: <span class="math-expr">h(x) = -3(2x² + 4x)<sup>1/2</sup></span></li>
+                        <li>Aplicamos la Regla de la Cadena: <span class="math-expr">h'(x) = -3 * [ (1/2)(2x² + 4x)<sup>-1/2</sup> * (4x + 4) ]</span></li>
+                        <li>Simplificamos la expresión: <span class="math-expr">h'(x) = (-3(4x + 4)) / (2√(2x² + 4x))</span></li>
+                    </ol>
+                </li>
+                <li>
+                    <strong class="label">5.3. Paso 2: Evaluando en el Punto (h'(2))</strong>
+                    <p>Sustituimos cada x con el valor 2.</p>
+                    <ul>
+                        <li><span class="math-expr">h'(2) = (-3(4(2) + 4)) / (2√(2(2)² + 4(2)))</span></li>
+                        <li><span class="math-expr">h'(2) = (-3(8 + 4)) / (2√(2(4) + 8))</span></li>
+                        <li><span class="math-expr">h'(2) = (-3(12)) / (2√(8 + 8))</span></li>
+                        <li><span class="math-expr">h'(2) = -36 / (2√16)</span></li>
+                        <li><span class="math-expr">h'(2) = -36 / (2 * 4) = -36 / 8</span></li>
+                        <li><span class="math-expr">h'(2) = -9/2</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">5.4. Síntesis y Significado:</strong>
+                    <p>El resultado es <span class="math-expr">h'(2) = -9/2</span> (o -4.5). Una pendiente de -4.5 representa una bajada muy rápida.</p>
+                </li>
+            </ul>
+            <div class="transition-note">Transición: ¡Lo estás haciendo de maravilla! Enfrentemos nuestro último desafío: un polinomio.</div>
+        </div>
+
+        <!-- Ejemplo 6 -->
+        <div class="example-block">
+            <h3>6. Ejemplo 6: l'(-1) para l(x) = -5x⁴ + 4x³ - 5x² + x - 10</h3>
+            <ul class="details-list">
+                <li>
+                    <strong class="label">6.1. La Misión:</strong>
+                    <ul>
+                        <li>Nuestra función es: <span class="math-expr">l(x) = -5x⁴ + 4x³ - 5x² + x - 10</span></li>
+                        <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = -1</span>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">6.2. Paso 1: Encontrando la Derivada (l'(x))</strong>
+                    <p>Derivar un polinomio implica aplicar la Regla de la Potencia a cada término individualmente.</p>
+                    <ul>
+                        <li>Derivada de -5x⁴ es -20x³</li>
+                        <li>Derivada de 4x³ es 12x²</li>
+                        <li>Derivada de -5x² es -10x</li>
+                        <li>Derivada de x es 1</li>
+                        <li>Derivada de la constante -10 es 0</li>
+                    </ul>
+                    <p>Función derivada: <span class="math-expr">l'(x) = -20x³ + 12x² - 10x + 1</span></p>
+                </li>
+                <li>
+                    <strong class="label">6.3. Paso 2: Evaluando en el Punto (l'(-1))</strong>
+                    <p>Sustituimos x con -1, prestando mucha atención a los signos.</p>
+                    <ul>
+                        <li><span class="math-expr">l'(-1) = -20(-1)³ + 12(-1)² - 10(-1) + 1</span></li>
+                        <li><span class="math-expr">l'(-1) = -20(-1) + 12(1) - (-10) + 1</span></li>
+                        <li><span class="math-expr">l'(-1) = 20 + 12 + 10 + 1</span></li>
+                        <li><span class="math-expr">l'(-1) = 43</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="label">6.4. Síntesis y Significado:</strong>
+                    <p>El resultado final es <span class="math-expr">l'(-1) = 43</span>. La pendiente de la línea tangente es extremadamente empinada.</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tabla Resumen -->
+        <h2>7. Tabla Resumen y Conclusiones</h2>
+        <p>Para consolidar todo lo que hemos aprendido, aquí tienes un resumen de cada ejemplo que resolvimos.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Función Original</th>
+                    <th>Regla Clave Aplicada</th>
+                    <th>Punto de Evaluación</th>
+                    <th>Resultado (Pendiente)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>f(x) = √(x² - 3)</td>
+                    <td>Regla de la Cadena</td>
+                    <td>x = 2</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>z(x) = (x + 1) / (2x - 3)</td>
+                    <td>Regla del Cociente</td>
+                    <td>x = -1</td>
+                    <td>-1/5</td>
+                </tr>
+                <tr>
+                    <td>g(x) = 2x⁻³ + 4x⁻¹</td>
+                    <td>Regla de la Potencia</td>
+                    <td>x = -1</td>
+                    <td>-10</td>
+                </tr>
+                <tr>
+                    <td>m(t) = 2 / ⁵√t</td>
+                    <td>Regla de la Potencia (fracc.)</td>
+                    <td>t = 1</td>
+                    <td>-2/5</td>
+                </tr>
+                <tr>
+                    <td>h(x) = -3√(2x² + 4x)</td>
+                    <td>Regla de la Cadena</td>
+                    <td>x = 2</td>
+                    <td>-9/2</td>
+                </tr>
+                <tr>
+                    <td>l(x) = -5x⁴ + ...</td>
+                    <td>Regla de la Potencia</td>
+                    <td>x = -1</td>
+                    <td>43</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="intro-box" style="margin-top: 30px;">
+            <p><strong>¡Felicitaciones!</strong> Has completado un recorrido exhaustivo por el proceso para evaluar derivadas en puntos específicos. Recuerda siempre el método de dos pasos: primero derivar, luego evaluar. La práctica constante es la clave para dominar estas habilidades. ¡Sigue adelante!</p>
+        </div>
+
     </div>
-
-    <!-- Ejemplo 1 -->
-    <div class="example-block">
-        <h3>1. Ejemplo 1: f'(2) para f(x) = √(x² - 3)</h3>
-        <ul class="details-list">
-            <li>
-                <strong class="label">1.1. La Misión:</strong>
-                <ul>
-                    <li>Nuestra función es: <span class="math-expr">f(x) = √(x² - 3)</span></li>
-                    <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = 2</span>.</li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">1.2. Paso 1: Encontrando la Derivada (f'(x))</strong>
-                <p>Esta función es una composición: la función <span class="math-expr">x² - 3</span> está "dentro" de una función de raíz cuadrada. Por lo tanto, debemos usar la <strong>Regla de la Cadena</strong>. Un buen truco para recordarlo es: <em>Derivada de lo de afuera, por la derivada de lo de adentro.</em></p>
-                <ol>
-                    <li>Reescribimos la raíz como un exponente: <span class="math-expr">f(x) = (x² - 3)<sup>1/2</sup></span></li>
-                    <li>Aplicamos la Regla de la Cadena:
-                        <ul>
-                            <li>Derivada de lo de afuera: <span class="math-expr">(1/2)(x² - 3)<sup>-1/2</sup></span></li>
-                            <li>Derivada de lo de adentro: <span class="math-expr">2x</span></li>
-                        </ul>
-                    </li>
-                    <li>Multiplicamos ambos resultados: <span class="math-expr">f'(x) = (1/2)(x² - 3)<sup>-1/2</sup> * (2x)</span></li>
-                    <li>Simplificamos la expresión: <span class="math-expr">f'(x) = x / √(x² - 3)</span></li>
-                </ol>
-            </li>
-            <li>
-                <strong class="label">1.3. Paso 2: Evaluando en el Punto (f'(2))</strong>
-                <p>Ahora, tomamos la derivada f'(x) y sustituimos cada x con el valor 2.</p>
-                <ul>
-                    <li><span class="math-expr">f'(2) = 2 / √(2² - 3)</span></li>
-                    <li><span class="math-expr">f'(2) = 2 / √(4 - 3)</span></li>
-                    <li><span class="math-expr">f'(2) = 2 / √1</span></li>
-                    <li><span class="math-expr">f'(2) = 2 / 1 = 2</span></li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">1.4. Síntesis y Significado:</strong>
-                <p>El resultado final es <span class="math-expr">f'(2) = 2</span>. Esto nos dice que la pendiente de la línea tangente a la gráfica de f(x) justo en el punto x=2 es 2. Una pendiente de 2 indica una subida pronunciada y positiva.</p>
-            </li>
-        </ul>
-        <div class="transition-note">Transición: ¡Excelente trabajo! Con la Regla de la Cadena dominada, apliquemos una regla diferente en el siguiente desafío.</div>
-    </div>
-
-    <!-- Ejemplo 2 -->
-    <div class="example-block">
-        <h3>2. Ejemplo 2: z'(-1) para z(x) = (x + 1) / (2x - 3)</h3>
-        <ul class="details-list">
-            <li>
-                <strong class="label">2.1. La Misión:</strong>
-                <ul>
-                    <li>Nuestra función es: <span class="math-expr">z(x) = (x + 1) / (2x - 3)</span></li>
-                    <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = -1</span>.</li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">2.2. Paso 1: Encontrando la Derivada (z'(x))</strong>
-                <p>Dado que tenemos una división de dos funciones, debemos usar la <strong>Regla del Cociente</strong>.</p>
-                <ol>
-                    <li>Identificamos u y v:
-                        <ul>
-                            <li><span class="math-expr">u = x + 1</span> => <span class="math-expr">u' = 1</span></li>
-                            <li><span class="math-expr">v = 2x - 3</span> => <span class="math-expr">v' = 2</span></li>
-                        </ul>
-                    </li>
-                    <li>Aplicamos la fórmula: <span class="math-expr">z'(x) = [ (1)(2x - 3) - (x + 1)(2) ] / (2x - 3)²</span></li>
-                    <li>Simplificamos el numerador paso a paso:
-                        <br><span class="math-expr">z'(x) = [ 2x - 3 - 2x - 2 ] / (2x - 3)²</span>
-                        <br><span class="math-expr">z'(x) = -5 / (2x - 3)²</span>
-                    </li>
-                </ol>
-            </li>
-            <li>
-                <strong class="label">2.3. Paso 2: Evaluando en el Punto (z'(-1))</strong>
-                <p>Sustituimos cada x con el valor -1 en nuestra derivada z'(x).</p>
-                <ul>
-                    <li><span class="math-expr">z'(-1) = -5 / (2(-1) - 3)²</span></li>
-                    <li><span class="math-expr">z'(-1) = -5 / (-2 - 3)²</span></li>
-                    <li><span class="math-expr">z'(-1) = -5 / (-5)²</span></li>
-                    <li><span class="math-expr">z'(-1) = -5 / 25 = -1/5</span></li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">2.4. Síntesis y Significado:</strong>
-                <p>El resultado final es <span class="math-expr">z'(-1) = -1/5</span>. La pendiente de la línea tangente a la gráfica de z(x) en el punto x=-1 es -1/5. Una pendiente fraccionaria pequeña como -1/5 nos indica una inclinación descendente muy suave en ese punto.</p>
-            </li>
-        </ul>
-        <div class="transition-note">Transición: Perfecto. Ahora que hemos manejado las fracciones con la Regla del Cociente, pasemos a un ejemplo con exponentes negativos.</div>
-    </div>
-
-    <!-- Ejemplo 3 -->
-    <div class="example-block">
-        <h3>3. Ejemplo 3: g'(-1) para g(x) = 2x⁻³ + 4x⁻¹</h3>
-        <ul class="details-list">
-            <li>
-                <strong class="label">3.1. La Misión:</strong>
-                <ul>
-                    <li>Nuestra función es: <span class="math-expr">g(x) = 2x⁻³ + 4x⁻¹</span></li>
-                    <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = -1</span>.</li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">3.2. Paso 1: Encontrando la Derivada (g'(x))</strong>
-                <p>Esta función es una suma de términos. Podemos derivar cada uno por separado usando la <strong>Regla de la Potencia</strong>.</p>
-                <ol>
-                    <li>Derivamos el primer término (2x⁻³): <span class="math-expr">(-3) * 2x<sup>(-3 - 1)</sup> = -6x⁻⁴</span></li>
-                    <li>Derivamos el segundo término (4x⁻¹): <span class="math-expr">(-1) * 4x<sup>(-1 - 1)</sup> = -4x⁻²</span></li>
-                    <li>Unimos los resultados: <span class="math-expr">g'(x) = -6x⁻⁴ - 4x⁻²</span></li>
-                </ol>
-            </li>
-            <li>
-                <strong class="label">3.3. Paso 2: Evaluando en el Punto (g'(-1))</strong>
-                <p>Sustituimos x con -1. Ten cuidado con los signos al elevar un número negativo a una potencia.</p>
-                <ul>
-                    <li><span class="math-expr">g'(-1) = -6(-1)⁻⁴ - 4(-1)⁻²</span></li>
-                    <li>Recuerda: (-1) elevado a una potencia par es 1.</li>
-                    <li><span class="math-expr">g'(-1) = -6(1) - 4(1)</span></li>
-                    <li><span class="math-expr">g'(-1) = -6 - 4 = -10</span></li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">3.4. Síntesis y Significado:</strong>
-                <p>El resultado es <span class="math-expr">g'(-1) = -10</span>. La pendiente de la línea tangente a g(x) en el punto x=-1 es -10, lo que indica una inclinación negativa muy pronunciada.</p>
-            </li>
-        </ul>
-        <div class="transition-note">Transición: ¡Excelente! Has demostrado que los exponentes negativos no tienen secretos para ti. Ahora, preparémonos para los exponentes fraccionarios.</div>
-    </div>
-
-    <!-- Ejemplo 4 -->
-    <div class="example-block">
-        <h3>4. Ejemplo 4: m'(1) para m(t) = 2 / ⁵√t</h3>
-        <ul class="details-list">
-            <li>
-                <strong class="label">4.1. La Misión:</strong>
-                <ul>
-                    <li>Nuestra función es: <span class="math-expr">m(t) = 2 / ⁵√t</span></li>
-                    <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">t = 1</span>.</li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">4.2. Paso 1: Encontrando la Derivada (m'(t))</strong>
-                <p>El paso más importante aquí es reescribir la función para poder usar la Regla de la Potencia. Las raíces en el denominador se convierten en exponentes fraccionarios negativos.</p>
-                <ol>
-                    <li>Reescribimos la función: <span class="math-expr">m(t) = 2 / t<sup>1/5</sup> = 2t<sup>-1/5</sup></span></li>
-                    <li>Ahora aplicamos la Regla de la Potencia: <span class="math-expr">m'(t) = (-1/5) * 2t<sup>(-1/5 - 1)</sup></span></li>
-                    <li>Simplificamos el exponente: <span class="math-expr">m'(t) = (-2/5)t<sup>-6/5</sup></span></li>
-                </ol>
-            </li>
-            <li>
-                <strong class="label">4.3. Paso 2: Evaluando en el Punto (m'(1))</strong>
-                <p>Sustituimos t con 1. Evaluar en t=1 es muy conveniente.</p>
-                <ul>
-                    <li><span class="math-expr">m'(1) = (-2/5)(1)<sup>-6/5</sup></span></li>
-                    <li><span class="math-expr">m'(1) = (-2/5)(1)</span></li>
-                    <li><span class="math-expr">m'(1) = -2/5</span></li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">4.4. Síntesis y Significado:</strong>
-                <p>El resultado final es <span class="math-expr">m'(1) = -2/5</span>. Esta es la pendiente de la línea tangente a la gráfica de m(t) en t=1, lo que representa una inclinación descendente suave.</p>
-            </li>
-        </ul>
-        <div class="transition-note">Transición: Como ves, a veces el paso más importante es reescribir la función. Volvamos a la Regla de la Cadena con un último ejemplo combinado.</div>
-    </div>
-
-    <!-- Ejemplo 5 -->
-    <div class="example-block">
-        <h3>5. Ejemplo 5: h'(2) para h(x) = -3√(2x² + 4x)</h3>
-        <ul class="details-list">
-            <li>
-                <strong class="label">5.1. La Misión:</strong>
-                <ul>
-                    <li>Nuestra función es: <span class="math-expr">h(x) = -3√(2x² + 4x)</span></li>
-                    <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = 2</span>.</li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">5.2. Paso 1: Encontrando la Derivada (h'(x))</strong>
-                <p>Este es otro caso para la Regla de la Cadena. El -3 al frente es un múltiplo constante.</p>
-                <ol>
-                    <li>Reescribimos la función: <span class="math-expr">h(x) = -3(2x² + 4x)<sup>1/2</sup></span></li>
-                    <li>Aplicamos la Regla de la Cadena: <span class="math-expr">h'(x) = -3 * [ (1/2)(2x² + 4x)<sup>-1/2</sup> * (4x + 4) ]</span></li>
-                    <li>Simplificamos la expresión: <span class="math-expr">h'(x) = (-3(4x + 4)) / (2√(2x² + 4x))</span></li>
-                </ol>
-            </li>
-            <li>
-                <strong class="label">5.3. Paso 2: Evaluando en el Punto (h'(2))</strong>
-                <p>Sustituimos cada x con el valor 2.</p>
-                <ul>
-                    <li><span class="math-expr">h'(2) = (-3(4(2) + 4)) / (2√(2(2)² + 4(2)))</span></li>
-                    <li><span class="math-expr">h'(2) = (-3(8 + 4)) / (2√(2(4) + 8))</span></li>
-                    <li><span class="math-expr">h'(2) = (-3(12)) / (2√(8 + 8))</span></li>
-                    <li><span class="math-expr">h'(2) = -36 / (2√16)</span></li>
-                    <li><span class="math-expr">h'(2) = -36 / (2 * 4) = -36 / 8</span></li>
-                    <li><span class="math-expr">h'(2) = -9/2</span></li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">5.4. Síntesis y Significado:</strong>
-                <p>El resultado es <span class="math-expr">h'(2) = -9/2</span> (o -4.5). Una pendiente de -4.5 representa una bajada muy rápida.</p>
-            </li>
-        </ul>
-        <div class="transition-note">Transición: ¡Lo estás haciendo de maravilla! Enfrentemos nuestro último desafío: un polinomio.</div>
-    </div>
-
-    <!-- Ejemplo 6 -->
-    <div class="example-block">
-        <h3>6. Ejemplo 6: l'(-1) para l(x) = -5x⁴ + 4x³ - 5x² + x - 10</h3>
-        <ul class="details-list">
-            <li>
-                <strong class="label">6.1. La Misión:</strong>
-                <ul>
-                    <li>Nuestra función es: <span class="math-expr">l(x) = -5x⁴ + 4x³ - 5x² + x - 10</span></li>
-                    <li>El objetivo es: Evaluar su derivada en el punto <span class="math-expr">x = -1</span>.</li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">6.2. Paso 1: Encontrando la Derivada (l'(x))</strong>
-                <p>Derivar un polinomio implica aplicar la Regla de la Potencia a cada término individualmente.</p>
-                <ul>
-                    <li>Derivada de -5x⁴ es -20x³</li>
-                    <li>Derivada de 4x³ es 12x²</li>
-                    <li>Derivada de -5x² es -10x</li>
-                    <li>Derivada de x es 1</li>
-                    <li>Derivada de la constante -10 es 0</li>
-                </ul>
-                <p>Función derivada: <span class="math-expr">l'(x) = -20x³ + 12x² - 10x + 1</span></p>
-            </li>
-            <li>
-                <strong class="label">6.3. Paso 2: Evaluando en el Punto (l'(-1))</strong>
-                <p>Sustituimos x con -1, prestando mucha atención a los signos.</p>
-                <ul>
-                    <li><span class="math-expr">l'(-1) = -20(-1)³ + 12(-1)² - 10(-1) + 1</span></li>
-                    <li><span class="math-expr">l'(-1) = -20(-1) + 12(1) - (-10) + 1</span></li>
-                    <li><span class="math-expr">l'(-1) = 20 + 12 + 10 + 1</span></li>
-                    <li><span class="math-expr">l'(-1) = 43</span></li>
-                </ul>
-            </li>
-            <li>
-                <strong class="label">6.4. Síntesis y Significado:</strong>
-                <p>El resultado final es <span class="math-expr">l'(-1) = 43</span>. La pendiente de la línea tangente es extremadamente empinada.</p>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Tabla Resumen -->
-    <h2>7. Tabla Resumen y Conclusiones</h2>
-    <p>Para consolidar todo lo que hemos aprendido, aquí tienes un resumen de cada ejemplo que resolvimos.</p>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Función Original</th>
-                <th>Regla Clave Aplicada</th>
-                <th>Punto de Evaluación</th>
-                <th>Resultado (Pendiente)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>f(x) = √(x² - 3)</td>
-                <td>Regla de la Cadena</td>
-                <td>x = 2</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>z(x) = (x + 1) / (2x - 3)</td>
-                <td>Regla del Cociente</td>
-                <td>x = -1</td>
-                <td>-1/5</td>
-            </tr>
-            <tr>
-                <td>g(x) = 2x⁻³ + 4x⁻¹</td>
-                <td>Regla de la Potencia</td>
-                <td>x = -1</td>
-                <td>-10</td>
-            </tr>
-            <tr>
-                <td>m(t) = 2 / ⁵√t</td>
-                <td>Regla de la Potencia (fracc.)</td>
-                <td>t = 1</td>
-                <td>-2/5</td>
-            </tr>
-            <tr>
-                <td>h(x) = -3√(2x² + 4x)</td>
-                <td>Regla de la Cadena</td>
-                <td>x = 2</td>
-                <td>-9/2</td>
-            </tr>
-            <tr>
-                <td>l(x) = -5x⁴ + ...</td>
-                <td>Regla de la Potencia</td>
-                <td>x = -1</td>
-                <td>43</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="intro-box" style="margin-top: 30px;">
-        <p><strong>¡Felicitaciones!</strong> Has completado un recorrido exhaustivo por el proceso para evaluar derivadas en puntos específicos. Recuerda siempre el método de dos pasos: primero derivar, luego evaluar. La práctica constante es la clave para dominar estas habilidades. ¡Sigue adelante!</p>
-    </div>
-
 </div>
+
+<!-- FOOTER AGREGADO -->
+<footer>
+    <p>Desarrollado por <span class="footer-highlight">Eduin Rivera</span></p>
+    <div class="filter-badge">Creado para el Filtro 5</div>
+</footer>
 
 </body>
 </html>
