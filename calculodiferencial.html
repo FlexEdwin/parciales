@@ -3,290 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía de Estudio - Derivadas</title>
-    <!-- Carga de MathJax para renderizado profesional de matemáticas -->
+    <meta name="description" content="Guía técnica de estudio sobre derivadas y algoritmos de resolución matemática.">
+    <meta name="author" content="Flex Lead Developer">
+    <title>Guía de Estudio: Algoritmos de Derivación</title>
+
+    <!-- Preconnect para optimización de carga -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io">
+
+    <!-- MathJax para renderizado matemático -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
+        /* 
+         * SISTEMA DE DISEÑO
+         * Tokens y variables para mantenibilidad
+         */
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f8f9fa;
-            --box-bg: #ffffff;
-            --text-color: #333;
+            /* Paleta de Colores */
+            --color-primary: #2c3e50;
+            --color-secondary: #34495e;
+            --color-accent: #3498db;
+            --color-accent-hover: #2980b9;
+            --color-bg: #f8f9fa;
+            --color-surface: #ffffff;
+            --color-text-main: #333333;
+            --color-text-muted: #666666;
+            --color-border: #e9ecef;
+            
+            /* Colores Semánticos */
+            --color-code-bg: #f1f3f5;
+            --color-code-text: #c0392b;
+            --color-highlight-bg: #e8f8f5;
+            --color-highlight-text: #0e6655;
+            --color-highlight-border: #d1f2eb;
+
+            /* Tipografía Fluida (clamp) */
+            --font-family-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-family-mono: 'Consolas', 'Monaco', monospace;
+            --font-size-base: 1rem;
+            --font-size-h1: clamp(2rem, 5vw, 3rem);
+            --font-size-h2: clamp(1.25rem, 3vw, 1.75rem);
+            
+            /* Espaciado */
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+
+            /* UI Tokens */
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --transition-base: all 0.2s ease-in-out;
+        }
+
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-family-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* Layout */
         .container {
+            width: 100%;
             max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md);
         }
 
+        /* Tipografía */
         header {
             text-align: center;
-            margin-bottom: 50px;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 20px;
+            margin-bottom: var(--spacing-xl);
+            border-bottom: 4px solid var(--color-accent);
+            padding-bottom: var(--spacing-lg);
         }
 
         h1 {
-            color: var(--primary-color);
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
+            color: var(--color-primary);
+            font-size: var(--font-size-h1);
+            margin: 0 0 var(--spacing-sm) 0;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
-            color: #7f8c8d;
-            font-size: 1.2em;
+            color: var(--color-text-muted);
+            font-size: 1.25rem;
             font-weight: 300;
-        }
-
-        .case-study {
-            background-color: var(--box-bg);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-left: 6px solid var(--accent-color);
-            transition: transform 0.2s;
-        }
-
-        .case-study:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            margin: 0;
         }
 
         h2 {
-            color: var(--primary-color);
+            color: var(--color-secondary);
+            font-size: var(--font-size-h2);
             margin-top: 0;
-            font-size: 1.5em;
             display: flex;
             align-items: center;
         }
 
+        /* Componentes: Casos de Estudio */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .case-study {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            border-left: 6px solid var(--color-accent);
+            transition: var(--transition-base);
+        }
+
+        .case-study:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Componentes: Cajas de Pasos */
         .step-box {
-            background-color: #fdfdfd;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
+            background-color: #fafafa;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            transition: border-color 0.2s;
+        }
+
+        .step-box:focus-within {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
 
         .step-label {
             font-weight: 700;
-            color: var(--accent-color);
+            color: var(--color-accent);
             text-transform: uppercase;
-            font-size: 0.85em;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: var(--spacing-sm);
         }
 
+        .math-explanation {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #ddd;
+            padding-left: 10px;
+            color: #555;
+        }
+
+        /* Componentes: Resultado */
         .result-highlight {
-            background-color: #e8f8f5;
-            color: #0e6655;
-            padding: 10px 15px;
-            border-radius: 6px;
+            background-color: var(--color-highlight-bg);
+            color: var(--color-highlight-text);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
             font-weight: 600;
             display: inline-block;
-            margin-top: 10px;
-            border: 1px solid #d1f2eb;
+            margin-top: var(--spacing-sm);
+            border: 1px solid var(--color-highlight-border);
         }
 
         code {
-            background-color: #eee;
-            padding: 2px 6px;
+            background-color: var(--color-code-bg);
+            color: var(--color-code-text);
+            padding: 0.2em 0.4em;
             border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', monospace;
+            font-family: var(--font-family-mono);
             font-size: 0.9em;
-            color: #d35400;
         }
 
+        /* Footer & Firma */
         footer {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid #ddd;
-            color: var(--primary-color);
         }
 
         .closing-message {
-            font-size: 1.3em;
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-lg);
             font-weight: 300;
-            margin-bottom: 30px;
-            color: var(--primary-color);
         }
 
         .signature-block {
-            display: inline-block;
             text-align: right;
-            border-right: 4px solid var(--primary-color);
-            padding-right: 15px;
+            border-right: 4px solid var(--color-primary);
+            padding-right: var(--spacing-md);
         }
 
         .signature-name {
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 800;
             display: block;
             text-transform: uppercase;
+            color: var(--color-primary);
+            line-height: 1.2;
         }
 
         .signature-role {
-            font-size: 0.9em;
-            color: #7f8c8d;
-            letter-spacing: 1px;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            letter-spacing: 0.05em;
         }
 
+        /* Accesibilidad: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .case-study:hover {
+                transform: none;
+            }
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            body { background-color: white; color: black; }
+            .container { max-width: 100%; padding: 0; margin: 0; }
+            .case-study {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            header { border-bottom: 2px solid #000; margin-bottom: 30px; }
+            footer { margin-top: 30px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>Guía de Estudio: Derivadas</h1>
-            <p class="subtitle">Desglose analítico de reglas de derivación y lógica paso a paso</p>
+            <h1>Guía de Estudio: Algoritmos de Derivación</h1>
+            <p class="subtitle">Documentación técnica de lógica matemática y resolución paso a paso</p>
         </header>
 
-        <!-- CASO 1 -->
-        <div class="case-study">
-            <h2>Caso Práctico 1: La Regla de la Cadena con Raíces</h2>
-            <p><strong>Función Objetivo:</strong> $$ f(x) = \sqrt[5]{5x^3 + 10x^2 + 3} $$</p>
+        <main>
+            <!-- CASO 1 -->
+            <article class="case-study">
+                <h2>Caso Práctico 1: La Regla de la Cadena con Raíces</h2>
+                <p><strong>Función Objetivo:</strong> $$ f(x) = \sqrt[5]{5x^3 + 10x^2 + 3} $$</p>
 
-            <div class="step-box">
-                <span class="step-label">Lógica de Conversión</span>
-                <p>Para procesar derivadas de raíces, convertimos la raíz n-ésima en un exponente fraccionario \((1/n)\).</p>
-                $$ f(x) = (5x^3 + 10x^2 + 3)^{1/5} $$
-                <p>Parámetro <code>a = 1/5</code></p>
-            </div>
+                <div class="step-box">
+                    <span class="step-label">Lógica de Conversión</span>
+                    <p>Para procesar derivadas de raíces, convertimos la raíz n-ésima en un exponente fraccionario \((1/n)\).</p>
+                    $$ f(x) = (5x^3 + 10x^2 + 3)^{1/5} $$
+                    <p>Parámetro <code>a = 1/5</code></p>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">Derivada Interna (u')</span>
-                <p>Calculamos la tasa de cambio de la función interna \(u = 5x^3 + 10x^2 + 3\).</p>
-                $$ u' = 15x^2 + 20x $$
-            </div>
+                <div class="step-box">
+                    <span class="step-label">Derivada Interna (u')</span>
+                    <p>Calculamos la tasa de cambio de la función interna \(u = 5x^3 + 10x^2 + 3\).</p>
+                    $$ u' = 15x^2 + 20x $$
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">Aplicación de Algoritmo</span>
-                <p>Aplicamos la fórmula \( f'(x) = a \cdot (u)^{a-1} \cdot (u') \).</p>
-                <p>Al restar 1 al exponente: \(\frac{1}{5} - \frac{5}{5} = -\frac{4}{5}\).</p>
-                <p><strong>Estructura intermedia:</strong> Exponente negativo <code>-4/5</code>.</p>
-                <p><strong>Estructura final simplificada:</strong> Al pasar el término al denominador, el exponente se vuelve positivo <code>4/5</code>.</p>
-            </div>
-        </div>
+                <div class="step-box">
+                    <span class="step-label">Aplicación de Algoritmo</span>
+                    <p>Aplicamos la fórmula \( f'(x) = a \cdot (u)^{a-1} \cdot (u') \).</p>
+                    <p>Al restar 1 al exponente: \(\frac{1}{5} - \frac{5}{5} = -\frac{4}{5}\).</p>
+                    <p><strong>Estructura intermedia:</strong> Exponente negativo <code>-4/5</code>.</p>
+                    <p><strong>Estructura final simplificada:</strong> Al pasar el término al denominador, el exponente se vuelve positivo <code>4/5</code>.</p>
+                </div>
+            </article>
 
-        <!-- CASO 2 -->
-        <div class="case-study">
-            <h2>Caso Práctico 2: Evaluación de Derivadas en Puntos Críticos</h2>
-            <p>Cálculo de la pendiente de la recta tangente en coordenadas específicas.</p>
+            <!-- CASO 2 (ACTUALIZADO CON PASO A PASO DETALLADO) -->
+            <article class="case-study">
+                <h2>Caso Práctico 2: Evaluación de Derivadas en Puntos Críticos</h2>
+                <p>Procedimiento detallado de derivación y sustitución numérica.</p>
 
-            <div class="step-box">
-                <span class="step-label">A. Derivada de Cociente</span>
-                <p>Función: \( f(x) = -\frac{4x+1}{5x^2+3} \) evaluada en \( x = -1 \).</p>
-                <p>Resultado tras aplicar regla del cociente y simplificar:</p>
-                <div class="result-highlight">-1/32</div>
-            </div>
+                <!-- Sub-caso A -->
+                <div class="step-box">
+                    <span class="step-label">A. Derivada de Cociente</span>
+                    <p><strong>Función:</strong> \( f(x) = -\frac{4x+1}{5x^2+3} \) evaluada en \( x = -1 \).</p>
+                    <div class="math-explanation">
+                        <p>Aplicamos Regla del Cociente: \( \left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2} \)</p>
+                        $$ f'(x) = - \frac{(4)(5x^2+3) - (4x+1)(10x)}{(5x^2+3)^2} $$
+                    </div>
+                    <p><strong>Sustitución en \(x = -1\):</strong></p>
+                    $$ f'(-1) = - \frac{4(5(1)+3) - (-4+1)(-10)}{(5(1)+3)^2} $$
+                    $$ f'(-1) = - \frac{4(8) - (-3)(-10)}{64} = - \frac{32 - 30}{64} = - \frac{2}{64} $$
+                    <div class="result-highlight">-1/32</div>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">B. Regla de la Cadena</span>
-                <p>Función: \( k(t) = 5\sqrt[3]{(t+1)^2} \) evaluada en \( t = 7 \).</p>
-                <p>Derivada: \( \frac{10}{3}(t+1)^{-1/3} \).</p>
-                <div class="result-highlight">5/3</div>
-            </div>
+                <!-- Sub-caso B -->
+                <div class="step-box">
+                    <span class="step-label">B. Regla de la Cadena</span>
+                    <p><strong>Función:</strong> \( k(t) = 5\sqrt[3]{(t+1)^2} = 5(t+1)^{2/3} \) evaluada en \( t = 7 \).</p>
+                    <div class="math-explanation">
+                        <p>Derivamos bajando el exponente:</p>
+                        $$ k'(t) = 5 \cdot \frac{2}{3}(t+1)^{-1/3} = \frac{10}{3\sqrt[3]{t+1}} $$
+                    </div>
+                    <p><strong>Sustitución en \(t = 7\):</strong></p>
+                    $$ k'(7) = \frac{10}{3\sqrt[3]{7+1}} = \frac{10}{3\sqrt[3]{8}} = \frac{10}{3(2)} = \frac{10}{6} $$
+                    <div class="result-highlight">5/3</div>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">C. Racional Simple</span>
-                <p>Función: \( m(x) = \frac{6x+1}{x^2+10} \) evaluada en \( x = 2 \).</p>
-                <div class="result-highlight">8/49</div>
-            </div>
+                <!-- Sub-caso C -->
+                <div class="step-box">
+                    <span class="step-label">C. Racional Simple</span>
+                    <p><strong>Función:</strong> \( m(x) = \frac{6x+1}{x^2+10} \) evaluada en \( x = 2 \).</p>
+                    <div class="math-explanation">
+                        <p>Aplicamos Regla del Cociente:</p>
+                        $$ m'(x) = \frac{6(x^2+10) - (6x+1)(2x)}{(x^2+10)^2} $$
+                    </div>
+                    <p><strong>Sustitución en \(x = 2\):</strong></p>
+                    $$ m'(2) = \frac{6(4+10) - (12+1)(4)}{(4+10)^2} = \frac{6(14) - (13)(4)}{196} $$
+                    $$ m'(2) = \frac{84 - 52}{196} = \frac{32}{196} $$
+                    <div class="result-highlight">8/49</div>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">D. Exponentes Fraccionarios</span>
-                <p>Función: \( g(t) = \frac{\sqrt[3]{t}}{2t} \) evaluada en \( t = -1 \).</p>
-                <p>Simplificación previa a derivar: \( \frac{1}{2}t^{-2/3} \).</p>
-                <div class="result-highlight">1/3</div>
-            </div>
+                <!-- Sub-caso D -->
+                <div class="step-box">
+                    <span class="step-label">D. Simplificación Algebraica Previa</span>
+                    <p><strong>Función:</strong> \( g(t) = \frac{\sqrt[3]{t}}{2t} \) evaluada en \( t = -1 \).</p>
+                    <div class="math-explanation">
+                        <p>Simplificamos antes de derivar para evitar la regla del cociente:</p>
+                        $$ g(t) = \frac{t^{1/3}}{2t^1} = \frac{1}{2}t^{1/3 - 1} = \frac{1}{2}t^{-2/3} $$
+                        <p>Ahora derivamos:</p>
+                        $$ g'(t) = \frac{1}{2}\left(-\frac{2}{3}\right)t^{-5/3} = -\frac{1}{3}t^{-5/3} $$
+                    </div>
+                    <p><strong>Sustitución en \(t = -1\):</strong></p>
+                    $$ g'(-1) = -\frac{1}{3(-1)^{5/3}} = -\frac{1}{3(-1)} = \frac{1}{3} $$
+                    <div class="result-highlight">1/3</div>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">E. Producto y Raíz</span>
-                <p>Función: \( i(x) = -x\sqrt{x} = -x^{3/2} \) evaluada en \( x = 4 \).</p>
-                <div class="result-highlight">-3</div>
-            </div>
+                <!-- Sub-caso E -->
+                <div class="step-box">
+                    <span class="step-label">E. Producto y Raíz</span>
+                    <p><strong>Función:</strong> \( i(x) = -x\sqrt{x} \) evaluada en \( x = 4 \).</p>
+                    <div class="math-explanation">
+                        <p>Reescribimos como potencia única:</p>
+                        $$ i(x) = -x^1 \cdot x^{1/2} = -x^{3/2} $$
+                        <p>Derivamos:</p>
+                        $$ i'(x) = -\frac{3}{2}x^{1/2} = -\frac{3}{2}\sqrt{x} $$
+                    </div>
+                    <p><strong>Sustitución en \(x = 4\):</strong></p>
+                    $$ i'(4) = -\frac{3}{2}\sqrt{4} = -\frac{3}{2}(2) = -3 $$
+                    <div class="result-highlight">-3</div>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">F. Racional Básica</span>
-                <p>Función: \( j(t) = \frac{1+t}{1-t} \) evaluada en \( t = 0 \).</p>
-                <div class="result-highlight">2</div>
-            </div>
-        </div>
+                <!-- Sub-caso F -->
+                <div class="step-box">
+                    <span class="step-label">F. Racional Básica</span>
+                    <p><strong>Función:</strong> \( j(t) = \frac{1+t}{1-t} \) evaluada en \( t = 0 \).</p>
+                    <div class="math-explanation">
+                        <p>Regla del Cociente:</p>
+                        $$ j'(t) = \frac{(1)(1-t) - (1+t)(-1)}{(1-t)^2} = \frac{1-t+1+t}{(1-t)^2} = \frac{2}{(1-t)^2} $$
+                    </div>
+                    <p><strong>Sustitución en \(t = 0\):</strong></p>
+                    $$ j'(0) = \frac{2}{(1-0)^2} = \frac{2}{1} $$
+                    <div class="result-highlight">2</div>
+                </div>
+            </article>
 
-        <!-- CASO 3 -->
-        <div class="case-study">
-            <h2>Caso Práctico 3: Desglose Estructurado de Derivación</h2>
-            <p><strong>Función:</strong> \( y = -12x^{-2} + 5x^{-1} + 10x^2 \)</p>
-            <p>Metodología de separación de coeficientes y signos para análisis granular.</p>
+            <!-- CASO 3 -->
+            <article class="case-study">
+                <h2>Caso Práctico 3: Desglose Estructurado de Derivación</h2>
+                <p><strong>Función:</strong> \( y = -12x^{-2} + 5x^{-1} + 10x^2 \)</p>
+                <p>Metodología de separación de coeficientes y signos para análisis granular.</p>
 
-            <div class="step-box">
-                <span class="step-label">Fase 1: Identificación</span>
-                <p>Separamos los coeficientes de sus variables:</p>
-                <ul>
-                    <li>Término 1: <code>-12</code></li>
-                    <li>Término 2: <code>+5</code></li>
-                    <li>Término 3: <code>+10</code></li>
-                </ul>
-            </div>
+                <div class="step-box">
+                    <span class="step-label">Fase 1: Identificación</span>
+                    <p>Separamos los coeficientes de sus variables:</p>
+                    <ul>
+                        <li>Término 1: <code>-12</code></li>
+                        <li>Término 2: <code>+5</code></li>
+                        <li>Término 3: <code>+10</code></li>
+                    </ul>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">Fase 2: Ejecución de la Regla de Potencia</span>
-                <p>Aplicamos \( \frac{d}{dx}(x^n) = nx^{n-1} \).</p>
-                <p>Los exponentes bajan a multiplicar a los coeficientes existentes:</p>
-                $$ \frac{dy}{dx} = [-12 \cdot (-2)]x^{-3} + [+5 \cdot (-1)]x^{-2} + [+10 \cdot (2)]x^{1} $$
-            </div>
+                <div class="step-box">
+                    <span class="step-label">Fase 2: Ejecución de la Regla de Potencia</span>
+                    <p>Aplicamos \( \frac{d}{dx}(x^n) = nx^{n-1} \).</p>
+                    <p>Los exponentes bajan a multiplicar a los coeficientes existentes:</p>
+                    $$ \frac{dy}{dx} = [-12 \cdot (-2)]x^{-3} + [+5 \cdot (-1)]x^{-2} + [+10 \cdot (2)]x^{1} $$
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">Fase 3: Resultado y Evaluación</span>
-                <p>Función derivada simplificada: \( 24x^{-3} - 5x^{-2} + 20x \)</p>
-                <p>Evaluación en \( x = -1 \):</p>
-                <div class="result-highlight">-49</div>
-            </div>
-        </div>
+                <div class="step-box">
+                    <span class="step-label">Fase 3: Resultado y Evaluación</span>
+                    <p>Función simplificada: \( 24x^{-3} - 5x^{-2} + 20x \)</p>
+                    <p>Evaluación final simplificada en \( x = -1 \):</p>
+                    $$ 24(-1) - 5(1) + 20(-1) = -24 - 5 - 20 $$
+                    <div class="result-highlight">-49</div>
+                </div>
+            </article>
 
-        <!-- CASO 4 -->
-        <div class="case-study">
-            <h2>Caso Práctico 4: Polinomios Complejos y Manejo de Signos</h2>
-            <p><strong>Función:</strong> \( y = 4x^3 - 7x^{-4} + 4x^{-5} - x + 6 \)</p>
+            <!-- CASO 4 -->
+            <article class="case-study">
+                <h2>Caso Práctico 4: Polinomios Complejos y Manejo de Signos</h2>
+                <p><strong>Función:</strong> \( y = 4x^3 - 7x^{-4} + 4x^{-5} - x + 6 \)</p>
 
-            <div class="step-box">
-                <span class="step-label">Análisis de Operadores</span>
-                <p>Es crucial mantener la integridad de los signos al multiplicar coeficientes negativos con exponentes negativos.</p>
-                <ul>
-                    <li>\( -7 \times -4 = +28 \) (Cambio de signo a positivo)</li>
-                    <li>\( +4 \times -5 = -20 \) (Cambio de signo a negativo)</li>
-                </ul>
-            </div>
+                <div class="step-box">
+                    <span class="step-label">Análisis de Operadores</span>
+                    <p>Es crucial mantener la integridad de los signos al multiplicar coeficientes negativos con exponentes negativos.</p>
+                    <ul>
+                        <li>\( -7 \times -4 = +28 \) (Cambio de signo a positivo)</li>
+                        <li>\( +4 \times -5 = -20 \) (Cambio de signo a negativo)</li>
+                    </ul>
+                </div>
 
-            <div class="step-box">
-                <span class="step-label">Resultado Final del Algoritmo</span>
-                $$ \frac{dy}{dx} = 12x^2 + 28x^{-5} - 20x^{-6} - 1 $$
-                <p><small>*Nota: La constante 6 desaparece ya que su derivada es 0.</small></p>
-            </div>
-        </div>
+                <div class="step-box">
+                    <span class="step-label">Resultado Final del Algoritmo</span>
+                    $$ \frac{dy}{dx} = 12x^2 + 28x^{-5} - 20x^{-6} - 1 $$
+                </div>
+            </article>
+        </main>
 
         <footer>
             <div class="closing-message">
                 ¡Felices fiestas y feliz fin de cuatrimestre!
             </div>
             <div class="signature-block">
-                <span class="signature-name">Flex</span>
+                <span class="signature-name">Eduin R.</span>
                 <span class="signature-role">Lead Developer</span>
             </div>
         </footer>
